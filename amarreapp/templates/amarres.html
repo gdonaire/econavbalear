@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Moorings' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Length" %}</th>
+        <th>{% trans "Beam" %}</th>
+        <th>{% trans "Jan" %}</th>
+        <th>{% trans "Feb" %}</th>
+        <th>{% trans "Mar" %}</th>
+        <th>{% trans "Apr" %}</th>
+        <th>{% trans "May" %}</th>
+        <th>{% trans "Jun" %}</th>
+        <th>{% trans "Jul" %}</th>
+        <th>{% trans "Aug" %}</th>
+        <th>{% trans "Sep" %}</th>
+        <th>{% trans "Oct" %}</th>
+        <th>{% trans "Nov" %}</th>
+        <th>{% trans "Dec" %}</th>
+        <th></th>
+      </tr>
+      {% for mooring in object_list %}
+      <tr>
+        <td>{{ mooring.nombre }}</td>
+        <td>{{ mooring.eslora }}</td>
+        <td>{{ mooring.manga }}</td>
+        <td>{{ mooring.precio_dia.enero }}</td>
+        <td>{{ mooring.precio_dia.febrero}}</td>
+        <td>{{ mooring.precio_dia.marzo }}</td>
+        <td>{{ mooring.precio_dia.abril }}</td>
+        <td>{{ mooring.precio_dia.mayo }}</td>
+        <td>{{ mooring.precio_dia.junio }}</td>
+        <td>{{ mooring.precio_dia.julio }}</td>
+        <td>{{ mooring.precio_dia.agosto}}</td>
+        <td>{{ mooring.precio_dia.septiembre }}</td>
+        <td>{{ mooring.precio_dia.octubre }}</td>
+        <td>{{ mooring.precio_dia.noviembre }}</td>
+        <td>{{ mooring.precio_dia.diciembre}}</td>
+        <td>
+          <form role="form" id="puertos_form" method="post" action="{% url 'list_amarres' %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value={{mooring.pk}}></input>
+	    {% if perms.amarreapp.change_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+	    {% endif %}
+	    {% if perms.amarreapp.delete_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+	    {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    {% endif %} 
+    {% if perms.amarreapp.add_puerto %}
+    <form role="form" id="puertos_form" method="post" action="{% url 'list_amarres' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}

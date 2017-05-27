@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Moorings port' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans 'Port' %}</th><th>{% trans 'Distance (nmi)' %}</th><th>{% trans 'Navegation costs (€)' %}</th><th>{% trans 'Mooring Cost (€)' %}</th><th>{% trans 'Total Cost (€)' %}</th></tr>   
+      {% for puerto, distancia_nmi, coste_navegacion, coste_amarre, coste_total in object_list %}                                 
+      <tr>                                                     
+        <td>{{ puerto }}</td>                             
+        <td>{{ distancia_nmi }}</td>                             
+        <td>{{ coste_navegacion }}</td>                             
+        <td>{{ coste_amarre }}</td>                             
+        <td>{{ coste_total }}</td>                             
+      </tr>                                                       
+      {% endfor %}                                                    
+    </table>           
+    {% else %}
+      <p>{% trans 'There are no ports avalaible.' %}</p>
+    {% endif %} 
+    <a href={% url 'search_mooring' %} class="btn btn-primary"  role="button" align="center">{% trans 'New Search' %}
+    </a>
+{% endblock %}

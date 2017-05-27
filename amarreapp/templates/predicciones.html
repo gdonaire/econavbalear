@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Forecasts' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans 'Zone' %}</th><th>{% trans 'Start Date' %}</th><th>{% trans 'End Date' %}</th><th>{% trans 'State' %}</th><th>{% trans 'Forecast' %}</th><th></th></tr>
+      {% for forecast in object_list %}
+      <tr>
+        <td>{{ forecast.get_zona_display }}</td>
+        <td>{{ forecast.fecha_inicio }}</td>
+        <td>{{ forecast.fecha_fin }}</td>
+        <td>{{ forecast.get_estado_de_la_mar_display }}</td>
+        <td>{{ forecast.prediccion}}</td>
+        <td>
+          <form role="form" id="predicciones_form" method="post" action="{% url 'list_predicciones' %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value={{ forecast.pk }}></input>
+	    {% if perms.amarreapp.change_prediccion %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+	    {% endif %} 
+	    {% if perms.amarreapp.delete_prediccion %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+	    {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    {% endif %} 
+    {% if perms.amarreapp.add_prediccion %}
+    <form role="form" id="predicciones_form" method="post" action="{% url 'list_predicciones' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}

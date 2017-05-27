@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Ports' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans "Name" %}</th><th>{% trans "Island" %}</th><th>{% trans "Latitude" %}</th><th>{% trans "Longitude" %}</th><th></th>
+      {% for port in object_list %}
+      <tr>
+        <td>{{ port.nombre }}</td>
+        <td>{{ port.isla}}</td>
+        <td>{{ port.latitud}}</td>
+        <td>{{ port.longitud}}</td>
+        <td>
+          <form role="form" id="puertos_form" method="post" action="{% url 'list_puertos' %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value={{port.pk}}></input>
+	    {% if perms.amarreapp.change_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+	    {% endif %}
+	    {% if perms.amarreapp.delete_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+	    {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    {% endif %} 
+    {% if perms.amarreapp.add_puerto %}
+    <form role="form" id="puertos_form" method="post" action="{% url 'list_puertos' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}

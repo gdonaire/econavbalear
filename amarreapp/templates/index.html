@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_usuarios' %}"
+	role="button">
+	Gestion Usuario
+</a>
+{% endif %}
+{% if perms.amarreapp.change_puerto %}
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_amarres' %}"
+	role="button">
+	Gestion Amarre-Precios
+</a>
+{% endif %}
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_puertos' %}"
+	role="button">
+	Gestion Puerto
+</a>
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_combustibles' %}"
+	role="button">
+	Gestion Combustible
+</a>
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_predicciones' %}"
+	role="button">
+	Gestion Prediccion
+</a >
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_embarcaciones' %}"
+	role="button">
+	Gestion Embarcacion
+</a>
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'search_mooring' %}"
+	role="button">
+	{% trans 'Search Mooring' %}
+</a>
+{% endif %}
+{% endblock %}                                   

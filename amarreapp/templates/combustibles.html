@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Fuel' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans "Name" %}</th><th>{% trans "Type" %}</th><th>{% trans "Price €/l" %}</th><th></th></tr>
+      {% for combustible in object_list %}
+      <tr>
+        <td>{{ combustible.nombre }}</td>
+        <td>{{ combustible.tipo}}</td>
+        <td>{{ combustible.precio_litro}}</td>
+        <td>
+          <form role="form" id="combustibles_form" method="post" action="{% url 'list_combustibles' %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value={{combustible.pk}}></input>
+	    {% if perms.amarreapp.change_combustible %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+            {% endif %}
+	    {% if perms.amarreapp.delete_combustible %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+	    {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>      
+    {% else %}
+    {% endif %}
+    {% if perms.amarreapp.add_combustible %}
+    <form role="form" id="combustibles_form" method="post" action="{% url 'list_combustibles' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Price' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans "Name" %}</th><th>{% trans "January" %}</th><th>{% trans "February" %}</th><th></th></tr>
+      {% for price in object_list %}
+      <tr>
+        <td>{{ price.nombre }}</td>
+        <td>{{ price.enero }}</td>
+        <td>{{ price.febrero }}</td>
+        <td>
+          <form role="form" id="precios_form" method="post" action="{% url 'list_precios' %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value={{price.pk}}></input>
+	    {% if perms.amarreapp.change_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+	    {% endif %}
+	    {% if perms.amarreapp.delete_puerto %}
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+	    {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    {% endif %} 
+    {% if perms.amarreapp.add_puerto %}
+    <form role="form" id="puertos_form" method="post" action="{% url 'list_precios' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}

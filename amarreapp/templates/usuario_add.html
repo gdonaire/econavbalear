@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Add User' %}</h1>
+  <form class="form-horizontal" method="post">
+  {% csrf_token %}
+    <div class="form-group">
+      <label for="id_username" class="control-label col-sm-2 requiredField">{% trans "Username" %}</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="id_username" maxlength="150" name="username" type="text" value=" " required /> 
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_password1" class="control-label col-sm-2 requiredField">{% trans "Password" %}</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="id_password1" name="password1" type="password" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_password2" class="control-label col-sm-2 requiredField">{% trans "Password (Confirm)" %}</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="id_password2" name="password2" type="password" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_first_name" class="control-label col-sm-2 requiredField">{% trans "First Name" %}</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="id_first_name" name="first_name" type="text" maxlength="30" required /> 
+      </div>
+      <label for="id_last_name" class="control-label col-sm-2 requiredField">{% trans "Last Name" %}</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="id_last_name" name="last_name" type="text" maxlength="30" required /> 
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_email" class="control-label col-sm-2 requiredField">{% trans "E-mail" %}</label> 
+      <div class="col-sm-6">
+        <input class="form-control" id="id_email" maxlength="254" name="email" type="email" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox-row col-sm-offset-2 col-sm-2">
+        <input id="id_is_superuser" name="is_superuser" type="checkbox"/>
+        <label for="id_is_superuser" class="vCheckboxLabel"> Es superusuario </label>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">{% trans "Profile" %}</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="id_DNI" class="control-label col-sm-2 requiredField">DNI</label> 
+          <div class="col-sm-6">
+            <input id="id_DNI" maxlength="13" name="DNI" type="text" class="form-control" required />
+          </div>
+        </div>
+        <div class="form-group">
+	  <label for="id_groups" class="control-label col-sm-2">Grupos:</label>
+          <div class="checkbox-row col-sm-6">
+            <input id="id_gestor_puerto" name="gestor_puerto" type="checkbox"/>
+            <label for="id_gestor_puerto" class="vCheckboxLabel"> Gestor de puertos</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox-row col-sm-offset-2 col-sm-6">
+            <input id="id_gestor_combustible" name="gestor_combustible" type="checkbox"/>
+            <label for="id_gestor_combustible" class="vCheckboxLabel"> Gestor de combustible</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox-row col-sm-offset-2 col-sm-6">
+            <input id="id_gestor_predicciones" name="gestor_predicciones" type="checkbox"/>
+            <label for="id_gestor_predicciones" class="vCheckboxLabel"> Gestor de predicciones</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" name="order" value="Save"    
+        class="btn btn-primary btn-block" id="submit-id-order"/>
+    </div>
+  </form>
+{% endblock %}

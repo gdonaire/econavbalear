@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form class="form-horizontal" role="form" id="puerto_add" method="post" action="{% url 'create_puerto' %}">
+  {% csrf_token %}
+  {% crispy puerto_form %}
+  {% crispy contacto_form %}
+  <button class="btn btn-primary buton-sub"
+      type="submit" name="order" value="contact">
+      {% trans 'Contact' %}
+  </button>
+  <button class="btn btn-primary buton-sub"
+      type="submit" name="order" value="Save">
+      {% trans 'Save' %}
+  </button>
+  <button class="btn btn-primary buton-sub"
+      type="submit" name="order" value="cancel">
+      {% trans 'Cancel' %}
+  </button>
+</form>
+{% endblock %}

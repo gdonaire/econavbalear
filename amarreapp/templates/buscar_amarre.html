@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Search Moorings' %}</h1>
+    <form role="form" id="search_form" method="post" action="{% url 'search_mooring' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="search">
+	    {% trans 'Search' %}
+	</button>
+    </form>
+{% endblock %}

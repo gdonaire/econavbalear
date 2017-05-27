@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans 'Users' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans "Username" %}</th><th>{% trans "Email Address" %}</th><th>{% trans "First Name" %}</th><th>{% trans "Last Name" %}</th><th>{% trans "Superuser" %}</th><th>{% trans "Groups" %}</th><th></th></tr>   
+      {% for usuario in object_list %}                                 
+      <tr>                                                     
+        <td>{{ usuario.username }}</td>                             
+        <td>{{ usuario.email }}</td>                             
+        <td>{{ usuario.first_name }}</td>                             
+        <td>{{ usuario.last_name }}</td>                             
+        <td>{{ usuario.is_superuser }}</td>
+        <td>
+        {% for g in usuario.groups.all %}
+          <p>{{ g.name }}</p>
+        {% endfor %}
+        </td>                            
+        <td>                                                    
+	  {% if request.user.is_superuser %}
+          <form role="form" id="usuarios_form" method="post" action="{% url 'list_usuarios' %}">
+            {% csrf_token %}                                
+            <input type="hidden" name="pk" value={{ usuario.pk }}></input>
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
+              {% trans 'Edit' %}
+            </button>
+            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
+              {% trans 'Delete' %}
+            </button>
+          </form> 
+          {% endif %}                                            
+        </td>                                                   
+      </tr>                                                       
+      {% endfor %}                                                    
+    </table>           
+    {% else %}
+    {% endif %} 
+    {% if request.user.is_superuser %}
+    <form role="form" id="usuarios_form" method="post" action="{% url 'list_usuarios' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}
