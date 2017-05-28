@@ -19,9 +19,9 @@ longitud_baleares = [degMinSec2Deg([1,12,47]),
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     DNI = models.CharField(max_length=13, blank=False)
-    gestor_puertos = models.BooleanField(default=False)
-    gestor_combustible = models.BooleanField(default=False)
-    gestor_predicciones = models.BooleanField(default=False)
+    gestor_puertos = models.BooleanField(blank = True, default=False)
+    gestor_combustible = models.BooleanField(blank = True, default=False)
+    gestor_predicciones = models.BooleanField(blank = True, default=False)
 
 
 class Combustible(models.Model):

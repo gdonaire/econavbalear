@@ -5,71 +5,102 @@
   <form class="form-horizontal" method="post">
   {% csrf_token %}
     <div class="form-group">
+      <span style="color: red;">{{ form.username.errors }} </span>
       <label for="id_username" class="control-label col-sm-2 requiredField">{% trans "Username" %}</label>
       <div class="col-sm-10">
-        <input class="form-control" id="id_username" maxlength="150" name="username" type="text" value=" " required /> 
+        <input class="form-control" id="id_username" maxlength="150" name="username" type="text"
+	value=
+	{% if form.username.value %}
+	  {{ form.username.value }}
+	{% else %}
+	  ""
+	{% endif %} required /> 
       </div>
     </div>
     <div class="form-group">
+      <span style="color: red;">{{ form.password1.errors }} </span>
       <label for="id_password1" class="control-label col-sm-2 requiredField">{% trans "Password" %}</label>
       <div class="col-sm-10">
         <input class="form-control" id="id_password1" name="password1" type="password" required />
       </div>
     </div>
     <div class="form-group">
+      <span style="color: red;">{{ form.password2.errors }} </span>
       <label for="id_password2" class="control-label col-sm-2 requiredField">{% trans "Password (Confirm)" %}</label>
       <div class="col-sm-10">
         <input class="form-control" id="id_password2" name="password2" type="password" required />
       </div>
     </div>
     <div class="form-group">
+      <span style="color: red;">{{ form.first_name.errors }} </span>
+      <span style="color: red;">{{ form.last_name.errors }} </span>
       <label for="id_first_name" class="control-label col-sm-2 requiredField">{% trans "First Name" %}</label>
       <div class="col-sm-2">
-        <input class="form-control" id="id_first_name" name="first_name" type="text" maxlength="30" required /> 
+        <input class="form-control" id="id_first_name" name="first_name" type="text" maxlength="30" 
+	value=
+        {% if form.first_name.value %}
+	  {{ form.first_name.value }}
+        {% else %}
+          ""
+        {% endif %} required /> 
       </div>
       <label for="id_last_name" class="control-label col-sm-2 requiredField">{% trans "Last Name" %}</label>
       <div class="col-sm-6">
-        <input class="form-control" id="id_last_name" name="last_name" type="text" maxlength="30" required /> 
+        <input class="form-control" id="id_last_name" name="last_name" type="text" maxlength="30"
+	value=
+        {% if form.last_name.value %}
+	  {{ form.last_name.value }}
+        {% else %}
+          ""
+        {% endif %} required /> 
       </div>
     </div>
     <div class="form-group">
+      <span style="color: red;">{{ form.email.errors }} </span>
       <label for="id_email" class="control-label col-sm-2 requiredField">{% trans "E-mail" %}</label> 
       <div class="col-sm-6">
-        <input class="form-control" id="id_email" maxlength="254" name="email" type="email" />
+        <input class="form-control" id="id_email" maxlength="254" name="email" type="email" 
+          value={% if form.email.value %} {{form.email.value}} {% else %} "" {% endif %} required/>
       </div>
     </div>
     <div class="form-group">
+      <span style="color: red;">{{ form.is_superuser.errors }} </span>
       <div class="checkbox-row col-sm-offset-2 col-sm-2">
-        <input id="id_is_superuser" name="is_superuser" type="checkbox"/>
-        <label for="id_is_superuser" class="vCheckboxLabel"> Es superusuario </label>
+        {{ form.is_superuser }}
+        <label for="id_is_superuser" class="vCheckboxLabel">{% trans "Is superuser" %}</label>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">{% trans "Profile" %}</div>
       <div class="panel-body">
         <div class="form-group">
+          <span style="color: red;">{{ form.DNI.errors }} </span>
           <label for="id_DNI" class="control-label col-sm-2 requiredField">DNI</label> 
           <div class="col-sm-6">
-            <input id="id_DNI" maxlength="13" name="DNI" type="text" class="form-control" required />
+            <input id="id_DNI" maxlength="13" name="DNI" type="text" class="form-control" 
+              value={% if form.DNI.value %} {{form.DNI.value}} {% else %} "" {% endif %}/>
           </div>
         </div>
         <div class="form-group">
-	  <label for="id_groups" class="control-label col-sm-2">Grupos:</label>
+          <span style="color: red;">{{ form.gestor_puertos.errors }} </span>
+          <span style="color: red;">{{ form.gestor_combustible.errors }} </span>
+          <span style="color: red;">{{ form.gestor_predicciones.errors }} </span>
+	  <label for="id_groups" class="control-label col-sm-2">{% trans "Groups:" %}</label>
           <div class="checkbox-row col-sm-6">
-            <input id="id_gestor_puerto" name="gestor_puerto" type="checkbox"/>
-            <label for="id_gestor_puerto" class="vCheckboxLabel"> Gestor de puertos</label>
+            {{ form.gestor_puertos }}
+            <label for="id_gestor_puertos" class="vCheckboxLabel"> {% trans "Port manager" %}</label>
           </div>
         </div>
         <div class="form-group">
           <div class="checkbox-row col-sm-offset-2 col-sm-6">
-            <input id="id_gestor_combustible" name="gestor_combustible" type="checkbox"/>
-            <label for="id_gestor_combustible" class="vCheckboxLabel"> Gestor de combustible</label>
+            {{ form.gestor_combustible }}
+            <label for="id_gestor_combustible" class="vCheckboxLabel">{% trans "Fuel Manager" %}</label>
           </div>
         </div>
         <div class="form-group">
           <div class="checkbox-row col-sm-offset-2 col-sm-6">
-            <input id="id_gestor_predicciones" name="gestor_predicciones" type="checkbox"/>
-            <label for="id_gestor_predicciones" class="vCheckboxLabel"> Gestor de predicciones</label>
+            {{ form.gestor_predicciones }}
+            <label for="id_gestor_predicciones" class="vCheckboxLabel">{% trans "Forecast manager" %}</label>
           </div>
         </div>
       </div>

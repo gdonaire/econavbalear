@@ -13,11 +13,11 @@
     <div class="form-group">
       <label for="id_eslora" class="control-label col-sm-2 requiredField">{% trans "Length" %}</label>
       <div class="col-sm-2">
-        <input class="form-control" id="id_eslora" name="eslora" type="number" step="0.01" min="4.00" max="15.99" required /> 
+        <input class="form-control" id="id_eslora" name="eslora" type="number" step="0.01" min="3.50" max="16.99" required /> 
       </div>
       <label for="id_manga" class="control-label col-sm-2 requiredField">{% trans "Beam" %}</label>
       <div class="col-sm-2">
-        <input class="form-control" id="id_eslora" name="manga" type="number" step="0.01" min="4.00" max="15.99" required /> 
+        <input class="form-control" id="id_eslora" name="manga" type="number" step="0.01" min="0.50" max="6.99" required /> 
       </div>
       <div class="col-sm-2">
         <div class="checkbox">
@@ -33,8 +33,10 @@
     <div class="form-group">
     </div>
          <div class="panel panel-default">
-           <div class="panel-heading">Precios</div>
-	   <table class="table table-striped">                                 
+           <div class="panel-heading">{% trans "Price" %}</div>
+             <div class="table-responsive">                                 
+               <table class="table table-striped">                                
+                <thead> 
 		 <tr>
 		   <th></th>
 		   <th>{% trans "Name" %}</th>
@@ -54,13 +56,13 @@
 		   <th></th>
 		   <th></th>
 		 </tr>
+                </thead>
+                <tbody>
 		 {% for precio in list_precios %}
 		 <tr>
-		     <div class="radio">
                      <td>
 		       <input type="radio" name="opcionPrecio" id="opcionPrecio" value={{precio.id}} required> 
 		     </td>
-		     </div>
 		     <td>{{ precio.nombre}}</td>
 		     <td>{{ precio.enero }}</td>
 		     <td>{{ precio.febrero}}</td>
@@ -97,7 +99,9 @@
 		      </td>
 		 </tr>
 		 {% endfor %}
-           </table>
+                </tbody>
+               </table>
+             </div>
          </div>
     <div class="form-group">
         <input type="submit" name="order" value="Save"    

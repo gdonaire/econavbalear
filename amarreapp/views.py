@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse 
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
+from django.contrib.auth.models import Group
 from django.utils import translation, timezone
 from django.utils.translation import ugettext as _
 #from django.utils.translation import (
@@ -97,20 +98,44 @@ class CreateUsuario(CreateView):
     form_class = UsuarioCreationForm
     template_name = 'usuario_add.html'
     success_url=reverse_lazy('list_usuarios')
-    
-    def form_valid(self, form):
-        usuario = form.save()
-        perfil = Profile(user = usuario)
-        cd = form.cleaned_data
-        print(cd)
-        perfil.DNI = form.cleaned_data.get("DNI")
-        perfil.gestor_puertos = form.cleaned_data.get("gestor_puertos")
-        perfil.gestor_combustible = form.cleaned_data.get("gestor_combustible")
-        perfil.gestor_predicciones = form.cleaned_data.get("gestor_predicciones")
-        perfil.save()
-        usuario.save()
-        return HttpResponseRedirect(self.get_success_url())
 
+    def get(self, request, *args, **kwargs):
+        form = UsuarioCreationForm()
+        context_dict = {'form': form}
+        # Return response back to the user, updating any cookies that need changed. 
+        response = render(request, self.template_name, context_dict) 
+        return response  
+
+    def post(self, request, *args, **kwargs):
+        order = request.POST.get('order')
+        data = request.POST
+        if (order == 'Save'):
+            form = UsuarioCreationForm(data)
+            if form.is_valid():
+                usuario = form.save()
+                perfil = Profile(user = usuario)
+                perfil.DNI = form.cleaned_data.get("DNI")
+                perfil.gestor_puertos = form.cleaned_data.get("gestor_puertos")
+                perfil.gestor_combustible = form.cleaned_data.get("gestor_combustible")
+                perfil.gestor_predicciones = form.cleaned_data.get("gestor_predicciones")
+                perfil.save()
+                usuario.save()
+                if perfil.gestor_puertos:
+                    g = Group.objects.get(name='gestor_puerto')
+                    g.user_set.add(usuario)
+                if perfil.gestor_combustible:
+                    g = Group.objects.get(name='gestor_combustible')
+                    g.user_set.add(usuario)
+                if perfil.gestor_predicciones:
+                    g = Group.objects.get(name='gestor_prediccion')
+                    g.user_set.add(usuario)
+                    
+            else:
+                context_dict = {'form': form}
+                response = render(request, self.template_name, context_dict) 
+                return response  
+        return HttpResponseRedirect(self.get_success_url())
+ 
 
 @method_decorator([login_required, user_passes_test(lambda u: u.is_superuser)], name='dispatch')
 class EditUsuario(UpdateView):

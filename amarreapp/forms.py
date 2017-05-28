@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from django.forms import CharField, PasswordInput
+from django.forms import CharField, PasswordInput, BooleanField
 from django.forms import ValidationError
 from django.forms import ModelForm
 from django.forms import SelectDateWidget
@@ -33,10 +33,23 @@ class UsuarioCreationForm(UserCreationForm):
         max_length = 13,
         label = ('DNI'),
     )
+    gestor_puertos = BooleanField(
+        label = ('Port manager'),
+        required = False,
+    )
+    gestor_combustible = BooleanField(
+        label = ('Fuel manager'),
+        required = False,
+    )
+    gestor_predicciones = BooleanField(
+        label = ('Forecast manager'),
+        required = False,
+    )
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'is_superuser', 'groups')
+        #fields = ('username', 'first_name', 'last_name', 'email', 'is_superuser', 'groups')
+        fields = ('username', 'first_name', 'last_name', 'email', 'is_superuser')
 
 
 class UsuarioChangeForm(UserChangeForm):
