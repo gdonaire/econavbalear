@@ -241,6 +241,16 @@ class EditAmarre(UpdateView):
     form_class = AmarreForm 
     success_url=reverse_lazy('list_amarres')
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print(self.object)
+        form = AmarreForm(instance=self.object)
+        print(form)
+        precios = Precio.objects.all()
+        context_dict = {'form': form, 'list_precios': precios, 'object': self.object }
+        # Return response back to the user, updating any cookies that need changed. 
+        response = render(request, 'amarre_edit.html', context_dict) 
+        return response  
 
 @method_decorator([login_required, permission_required('amarreapp.delete_puertos')], name='dispatch')
 class DeleteAmarre(DeleteView):
