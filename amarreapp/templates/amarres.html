@@ -3,6 +3,7 @@
 {% block content %}
 <h1>{% trans 'Moorings' %}</h1>
     {% if object_list %}
+    <div class="table-responsive">                                 
     <table class="table table-striped">                                 
       <tr>
         <th>{% trans "Name" %}</th>
@@ -44,20 +45,25 @@
             {% csrf_token %}
             <input type="hidden" name="pk" value={{mooring.pk}}></input>
 	    {% if perms.amarreapp.change_puerto %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
-              {% trans 'Edit' %}
-            </button>
+	    <a class="related-widget-wrapper-link change-related" id="change_id_precio"
+	       href="{% url 'edit_amarre' pk=mooring.id %}?amp;_popup=1"
+	       title="{% trans 'Change selected mooring' %}">
+	      <img src="/static/admin/img/icon-changelink.svg" alt="Modificar"/>
+            </a>
 	    {% endif %}
 	    {% if perms.amarreapp.delete_puerto %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
-              {% trans 'Delete' %}
-            </button>
+            <a class="related-widget-wrapper-link delete-related" id="delete_id_contacto"
+	       href="{% url 'delete_amarre' pk=mooring.id %}?&amp;_popup=1"
+	       title="{% trans 'Delete selected mooring' %}">
+	      <img src="/static/admin/img/icon-deletelink.svg" alt="Eliminar"/>
+	    </a>
 	    {% endif %}
           </form>
         </td>
       </tr>
       {% endfor %}
     </table>
+    </div>
     {% else %}
     {% endif %} 
     {% if perms.amarreapp.add_puerto %}

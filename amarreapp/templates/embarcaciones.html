@@ -3,27 +3,39 @@
 {% block content %}
 <h1>{% trans 'Boats' %}</h1>
     {% if object_list %}
+    <div class="table-responsive">                                 
     <table class="table table-striped">                                 
-      <tr><th>{% trans 'Name' %}</th><th>{% trans 'Registration number' %}</th><th></th><th></th></tr>   
+      <tr>
+        <th>{% trans 'Name' %}</th>
+        <th>{% trans 'Registration number' %}</th>
+        <th>{% trans 'Length' %}</th>
+        <th>{% trans 'Beam' %}</th>
+        <th>{% trans 'Draught' %}</th>
+        <th></th>
+      </tr>   
       {% for boat in object_list %}                                     
       <tr>                                                        
         <td>{{ boat.nombre }}</td>                             
         <td>{{ boat.matricula }}</td>                             
-        <td>                                                    
-          <form role="form" id="boats_form" method="post" action="{% url 'list_embarcaciones' %}">
-            {% csrf_token %}                                
-            <input type="hidden" name="pk" value={{ boat.pk }}></input>
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
-              {% trans 'Edit' %}
-            </button>
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
-              {% trans 'Delete' %}
-            </button>
-          </form>                                             
+        <td>{{ boat.eslora }}</td>                             
+        <td>{{ boat.manga }}</td>                             
+        <td>{{ boat.calado }}</td>                             
+        <td>                                             
+          <a class="related-widget-wrapper-link change-related" id="change_id_precio"
+	     href="{% url 'edit_embarcacion' pk=boat.id %}?amp;_popup=1"
+	     title="{% trans 'Change selected boat' %}">
+	    <img src="/static/admin/img/icon-changelink.svg" alt="{% trans 'Change' %}"/>
+          </a>
+          <a class="related-widget-wrapper-link delete-related" id="delete_id_precio"
+	     href="{% url 'delete_embarcacion' pk=boat.id %}?&amp;_popup=1"
+	     title="{% trans 'Delete selected boat' %}">
+	    <img src="/static/admin/img/icon-deletelink.svg" alt="{% trans 'Delete' %}"/>
+          </a>
         </td>                                                   
       </tr>                                                       
       {% endfor %}                                                    
     </table>           
+    </div>           
     {% else %}
     {% endif %} 
     <form role="form" id="boats_form" method="post" action="{% url 'list_embarcaciones' %}">

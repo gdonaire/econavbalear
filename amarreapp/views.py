@@ -171,6 +171,15 @@ class CreatePrecio(CreateView):
     model = Precio 
     form_class = PrecioForm 
     success_url=reverse_lazy('list_precios')
+    
+    def post(self, request, *args, **kwargs):
+        order = request.POST.get('order')
+        print('CreatePrecio order %s' % order)
+        if (order == 'cancel'):
+            url = self.get_success_url()
+            return HttpResponseRedirect(url)
+        else:
+            return super(CreatePrecio, self).post(request, *args, **kwargs)
 
 
 @method_decorator([login_required, permission_required('amarreapp.change_puerto')], name='dispatch')
@@ -483,6 +492,8 @@ def search_mooring(request):
             # Mirar si hay puertos con amarres para nuestra embarcacion
             puertos = []
             puertos = localizar_puertos_con_amarre(embarcacion)
+            print('Puertos con amarre')
+            print(puertos)
             if puertos:
                 puerto_distancia = []
                 puerto_distancia = calcular_distancias_puerto(posicion_barca, puertos)
@@ -491,6 +502,8 @@ def search_mooring(request):
                 for x in puerto_distancia:
                     puertos.append(x[0])
                     distancias_nmi.append(x[1])
+                print('Distancias puerto (nmi)')
+                print(distancias_nmi)
                 # Calcular los costes....
                 factor_correccion = []
                 for i in range(len(puerto_distancia)):
@@ -591,13 +604,13 @@ def calcular_factor_correccion_meteo(posicion, distancia_nmi, embarcacion, fecha
         # Nos quedamos con la primera prediccion
         prediccion = prediccion[0]
         if prediccion.get_estado_de_la_mar_display() == 'Calma':
-            factor = 1.02
+            factor = 1.1
         elif prediccion.get_estado_de_la_mar_display() == 'Rizada':
-            factor = 1.2
+            factor = 1.0
         elif prediccion.get_estado_de_la_mar_display() == 'Marejadilla':
-            factor = 1.4
+            factor = 0.9
         elif prediccion.get_estado_de_la_mar_display() == 'Marejada':
-            factor = 1.6
+            factor = 0.7
         else:
             # Cualquier otra prediccion devolver un valor exagerado
             factor = FACTOR_CORRECCION_NO_NAVEGAR

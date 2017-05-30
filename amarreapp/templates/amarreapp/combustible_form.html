@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {% block content %}
-<form method="post" action="">
+<form class="form-horizontal" role="form" method="post" action="">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-primary"  align="center" 
-	  type="submit" name="order" value="Save">
-    {% trans 'Save' %}
-  </button>
+  {% bootstrap_form form layout='horizontal' %}
+  <div class="form-group">
+    <label class="col-md-3 control-label"></label>
+    <div class="col-md-9">
+      <button type="submit" name="order" value="Save"    
+              class="btn btn-primary" id="submit-id-order">
+        {% trans 'Save' %}
+      </button>
+    </div>
+  </div>
 </form>
 {% endblock %}

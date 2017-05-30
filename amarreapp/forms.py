@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from django.forms import CharField, PasswordInput, BooleanField
 from django.forms import ValidationError
 from django.forms import ModelForm
-from django.forms import SelectDateWidget
+from django.forms import SelectDateWidget, NumberInput, CheckboxSelectMultiple
 from django.forms import inlineformset_factory 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
@@ -84,12 +84,27 @@ class PuertoForm(ModelForm):
     class Meta:
         model = Puerto
         fields = ('nombre', 'isla', 'latitud', 'longitud', 'amarre', 'duchas', 'informacion')
+        labels = {
+            'nombre': _('Name'), 
+            'isla': _('Island'),
+            'latitud': _('Lattitude'),
+            'longitud': _('Longitude'),
+            'amarre': _('Moorings'),
+            'duchas': _('Showers'),
+            'informacion': _('Information'),
+        }
+        widgets = {
+            'amarre': CheckboxSelectMultiple(),
+        }
 
 
 class CombustibleForm(ModelForm):
     class Meta:
         model = Combustible
         fields = ('nombre', 'tipo', 'precio_litro')
+        widgets = {
+            'precio_litro': NumberInput(attrs={'min': '0.00',}),
+        }
 
 
 class PrediccionForm(ModelForm):
@@ -108,3 +123,16 @@ class EmbarcacionForm(ModelForm):
                   'eslora', 'manga', 'calado', 
                   'motor_num', 'motor_potencia', 'motor_tipo',
                   'motor_consumo', 'motor_combustible', 'velocidad_kn')
+        labels = {
+            'nombre': _('Name'), 
+            'matricula': _('ID.Number'),
+            'eslora': _('Length (m)'),
+            'manga': _('Beam (m)'),
+            'calado': _('Draugth (m)'),
+            'motor_num': _('# motor'),
+            'motor_potencia': _('Motor CV'),
+            'motor_tipo': _('Motor Type'),
+            'motor_consumo': _('Consume (l/h)'),
+            'motor_combustible': _('Motor fuel'),
+            'velocidad_kn': _('Velocity (kn)'),
+        }

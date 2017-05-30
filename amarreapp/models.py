@@ -35,7 +35,7 @@ class Combustible(models.Model):
         choices=TIPO_COMBUSTIBLE_CHOICES,
         default='GASL',
     )
-    precio_litro = models.DecimalField(max_digits=5, decimal_places=2)
+    precio_litro = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0.00)])
     # Timestamp y updated (creado y modificado)
     timestamp = models.DateTimeField(_('TimeStamp'), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_('Updated'), auto_now=True, auto_now_add=False)

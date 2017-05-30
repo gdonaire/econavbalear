@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load bootstrap3 %}
 {% block content %}
 <h1>{% trans 'Search Moorings' %}</h1>
-    <form role="form" id="search_form" method="post" action="{% url 'search_mooring' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary btn-block"  align="center" 
-		  type="submit" name="order" value="search">
-	    {% trans 'Search' %}
-	</button>
-    </form>
+<form class="form-horizontal" role="form" method="post" action="{% url 'search_mooring' %}">
+  {% csrf_token %}
+  {% bootstrap_form form layout='horizontal' %}
+  <div class="form-group">
+    <label class="col-md-3 control-label"></label>
+    <div class="col-md-9">
+      <button type="submit" name="order" value="search"    
+              class="btn btn-primary" id="submit-id-order">
+        {% trans 'Search' %}
+      </button>
+    </div>
+  </div>
+</form>
 {% endblock %}

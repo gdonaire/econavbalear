@@ -3,6 +3,7 @@
 {% block content %}
 <h1>{% trans 'Ports' %}</h1>
     {% if object_list %}
+    <div class="table-responsive">
     <table class="table table-striped">                                 
       <tr><th>{% trans "Name" %}</th><th>{% trans "Island" %}</th><th>{% trans "Latitude" %}</th><th>{% trans "Longitude" %}</th><th></th>
       {% for port in object_list %}
@@ -12,24 +13,25 @@
         <td>{{ port.latitud}}</td>
         <td>{{ port.longitud}}</td>
         <td>
-          <form role="form" id="puertos_form" method="post" action="{% url 'list_puertos' %}">
-            {% csrf_token %}
-            <input type="hidden" name="pk" value={{port.pk}}></input>
-	    {% if perms.amarreapp.change_puerto %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
-              {% trans 'Edit' %}
-            </button>
-	    {% endif %}
-	    {% if perms.amarreapp.delete_puerto %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
-              {% trans 'Delete' %}
-            </button>
-	    {% endif %}
-          </form>
+	  {% if perms.amarreapp.change_puerto %}
+          <a class="related-widget-wrapper-link change-related" id="change_id_precio"
+	     href="{% url 'edit_puerto' pk=port.id %}?amp;_popup=1"
+	     title="{% trans 'Change selected port' %}">
+	    <img src="/static/admin/img/icon-changelink.svg" alt="{% trans 'Change' %}"/>
+          </a>
+	  {% endif %}
+	  {% if perms.amarreapp.delete_puerto %}
+          <a class="related-widget-wrapper-link delete-related" id="delete_id_precio"
+	     href="{% url 'delete_puerto' pk=port.id %}?&amp;_popup=1"
+	     title="{% trans 'Delete selected port' %}">
+	    <img src="/static/admin/img/icon-deletelink.svg" alt="{% trans 'Delete' %}"/>
+          </a>
+	  {% endif %}
         </td>
       </tr>
       {% endfor %}
     </table>
+    </div>
     {% else %}
     {% endif %} 
     {% if perms.amarreapp.add_puerto %}

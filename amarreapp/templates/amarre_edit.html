@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load l10n %}
 {% block content %}
 <h1>{% trans 'Add Mooring' %}</h1>
   <form class="form-horizontal" method="post">
@@ -13,11 +14,11 @@
     <div class="form-group">
       <label for="id_eslora" class="control-label col-sm-2 requiredField">{% trans "Length" %}</label>
       <div class="col-sm-2">
-        <input class="form-control" id="id_eslora" name="eslora" type="number" step="0.01" min="3.50" max="16.99" value={{ object.eslora}} required /> 
+        <input class="form-control" id="id_eslora" name="eslora" type="number" step="0.01" min="3.50" max="16.99" value="{{ object.eslora|unlocalize }}" required /> 
       </div>
       <label for="id_manga" class="control-label col-sm-2 requiredField">{% trans "Beam" %}</label>
       <div class="col-sm-2">
-        <input class="form-control" id="id_eslora" name="manga" type="number" step="0.01" min="0.50" max="6.99" value={{ object.manga}} required /> 
+        <input class="form-control" id="id_manga" name="manga" type="number" step="0.01" min="0.50" max="6.99" value="{{ object.manga|unlocalize }}" required /> 
       </div>
       <div class="col-sm-2">
         <div class="checkbox">
@@ -54,14 +55,14 @@
 		   <th>{% trans "Dec" %}</th>
 		   <th></th>
 		   <th></th>
-		   <th></th>
 		 </tr>
                 </thead>
                 <tbody>
 		 {% for precio in list_precios %}
 		 <tr>
                      <td>
-		       <input type="radio" name="opcionPrecio" id="opcionPrecio" value={{precio.id}} required> 
+		       <input type="radio" name="opcionPrecio" id="opcionPrecio" value={{precio.id}} 
+                       {% if object.precio_dia_id == precio.id %} checked="checked" {% endif %} required> 
 		     </td>
 		     <td>{{ precio.nombre}}</td>
 		     <td>{{ precio.enero }}</td>
@@ -79,28 +80,26 @@
 		     <td>
 		       <a class="related-widget-wrapper-link change-related" id="change_id_precio"
 			  href="{% url 'edit_precio' pk=precio.id %}?amp;_popup=1"
-			  title="Cambiar precio seleccionado">
-			 <img src="/static/admin/img/icon-changelink.svg" alt="Modificar"/>
+			  title="{% trans 'Change selected price' %}">
+			 <img src="/static/admin/img/icon-changelink.svg" alt="{% trans 'Change' %}"/>
 		       </a>
 		     </td>
 		     <td>
-		       <a class="related-widget-wrapper-link add-related" id="add_id_precio"
-			  href="{% url 'create_precio' %}?&amp;_popup=1"
-			  title="Añadir otro precio">
-			 <img src="/static/admin/img/icon-addlink.svg" alt="Añadir"/>
-		       </a>
-		     </td>
-		     <td>
-		       <a class="related-widget-wrapper-link delete-related" id="delete_id_contacto"
+		       <a class="related-widget-wrapper-link delete-related" id="delete_id_precio"
 			  href="{% url 'delete_precio' pk=precio.id %}?&amp;_popup=1"
-			  title="Eliminar precio seleccionada/o">
-			 <img src="/static/admin/img/icon-deletelink.svg" alt="Eliminar"/>
+			  title="{% trans 'Delete selected price' %}">
+			 <img src="/static/admin/img/icon-deletelink.svg" alt="{% trans 'Delete' %}"/>
 		       </a>
-		      </td>
+		     </td>
 		 </tr>
 		 {% endfor %}
                 </tbody>
                </table>
+	       <a class="btn btn-primary btn-block" id="add_id_precio"
+	          href="{% url 'create_precio' %}?&amp;_popup=1"
+	          title="{% trans 'Add Price' %}">
+	          {% trans 'Add Price' %}
+	       </a>
              </div>
          </div>
     <div class="form-group">

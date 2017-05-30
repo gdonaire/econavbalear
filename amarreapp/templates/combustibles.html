@@ -3,32 +3,40 @@
 {% block content %}
 <h1>{% trans 'Fuel' %}</h1>
     {% if object_list %}
+    <div class="table-responsive">                                 
     <table class="table table-striped">                                 
-      <tr><th>{% trans "Name" %}</th><th>{% trans "Type" %}</th><th>{% trans "Price €/l" %}</th><th></th></tr>
+      <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Type" %}</th>
+        <th>{% trans "Price €/l" %}</th>
+        <th>{% trans "Date" %}</th>
+        <th></th></tr>
       {% for combustible in object_list %}
       <tr>
         <td>{{ combustible.nombre }}</td>
         <td>{{ combustible.tipo}}</td>
         <td>{{ combustible.precio_litro}}</td>
+        <td>{{ combustible.updated }}</td>
         <td>
-          <form role="form" id="combustibles_form" method="post" action="{% url 'list_combustibles' %}">
-            {% csrf_token %}
-            <input type="hidden" name="pk" value={{combustible.pk}}></input>
-	    {% if perms.amarreapp.change_combustible %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="edit">
-              {% trans 'Edit' %}
-            </button>
-            {% endif %}
-	    {% if perms.amarreapp.delete_combustible %}
-            <button class="btn btn-sm btn-danger" type="submit" name="order" value="delete">
-              {% trans 'Delete' %}
-            </button>
-	    {% endif %}
-          </form>
+	  {% if perms.amarreapp.change_combustible %}
+	  <a class="related-widget-wrapper-link change-related" id="change_id_precio"
+	     href="{% url 'edit_combustible' pk=combustible.id %}?amp;_popup=1"
+	     title="{% trans 'Change selected fuel' %}">
+	    <img src="/static/admin/img/icon-changelink.svg" alt="{% trans 'Change' %}"/>
+	  </a>
+	  {% endif %}
+	  {% if perms.amarreapp.delete_combustible %}
+	  <a class="related-widget-wrapper-link delete-related" id="delete_id_precio"
+	     href="{% url 'delete_combustible' pk=combustible.id %}?&amp;_popup=1"
+	     title="{% trans 'Delete selected fuel' %}">
+	    <img src="/static/admin/img/icon-deletelink.svg" alt="{% trans 'Delete' %}"/>
+	  </a>
+	  {% endif %}
         </td>
       </tr>
       {% endfor %}
     </table>      
+    </div>      
     {% else %}
     {% endif %}
     {% if perms.amarreapp.add_combustible %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # Third party apps
     'registration',
+    'bootstrap3',
     'crispy_forms',
     # My apps
     'amarreapp.apps.AmarreappConfig',
