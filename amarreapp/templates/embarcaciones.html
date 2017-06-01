@@ -7,7 +7,6 @@
     <table class="table table-striped">                                 
       <tr>
         <th>{% trans 'Name' %}</th>
-        <th>{% trans 'Registration number' %}</th>
         <th>{% trans 'Length' %}</th>
         <th>{% trans 'Beam' %}</th>
         <th>{% trans 'Draught' %}</th>
@@ -16,7 +15,6 @@
       {% for boat in object_list %}                                     
       <tr>                                                        
         <td>{{ boat.nombre }}</td>                             
-        <td>{{ boat.matricula }}</td>                             
         <td>{{ boat.eslora }}</td>                             
         <td>{{ boat.manga }}</td>                             
         <td>{{ boat.calado }}</td>                             

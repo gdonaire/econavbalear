@@ -20,9 +20,10 @@ from extra_views import CreateWithInlinesView, InlineFormSet
 from decimal import Decimal, getcontext
 from datetime import timedelta
 from django.http import HttpResponse
+from django.template import RequestContext
 from django.forms import modelformset_factory
 from .forms import FormContacto
-from .forms import UsuarioCreationForm, UsuarioChangeForm
+from .forms import UsuarioCreationForm, UsuarioChangeForm, reset_form
 from .forms import PrecioForm, AmarreForm
 from .forms import PuertoForm
 from .forms import CombustibleForm
@@ -101,6 +102,8 @@ class CreateUsuario(CreateView):
 
     def get(self, request, *args, **kwargs):
         form = UsuarioCreationForm()
+        print('CreateUsuario get')
+        print(form)
         context_dict = {'form': form}
         # Return response back to the user, updating any cookies that need changed. 
         response = render(request, self.template_name, context_dict) 
@@ -109,8 +112,12 @@ class CreateUsuario(CreateView):
     def post(self, request, *args, **kwargs):
         order = request.POST.get('order')
         data = request.POST
+        print('CreateUsuario post')
+        print(order)
+        print(data)
         if (order == 'Save'):
             form = UsuarioCreationForm(data)
+            print(form)
             if form.is_valid():
                 usuario = form.save()
                 perfil = Profile(user = usuario)
@@ -148,6 +155,31 @@ class EditUsuario(UpdateView):
 class DeleteUsuario(DeleteView):
     model = User 
     success_url=reverse_lazy('list_usuarios')
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        order = request.POST.get('order')
+        form = reset_form(request.POST)
+        if (order is not None) and (order == 'Change'):
+            if form.is_valid():
+                newpassword=form.cleaned_data['newpassword1'],
+                username=request.user.username
+                password=form.cleaned_data['oldpassword']
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    user.set_password(newpassword)
+                    user.save()
+                    return render(request, 'registration/password_change_done.html')
+                else:
+                    return render(request, 'registration/password_change_form.html', {'error':'You have entered wrong password','form': form,})
+        else:
+           return render(request, 'registration/password_change_form.html',{'error':'You have entered wrong password','form': form,})
+    else:
+        form = reset_form()
+        context_dict = {'form': form}
+        response = render(request, 'registration/password_change_form.html', context_dict) 
+        return response
 
 
 @method_decorator(login_required, name='dispatch')
@@ -260,6 +292,25 @@ class EditAmarre(UpdateView):
         # Return response back to the user, updating any cookies that need changed. 
         response = render(request, 'amarre_edit.html', context_dict) 
         return response  
+    
+    def post(self, request, *args, **kwargs):
+        order = request.POST.get('order')
+        if (order == 'Save'):
+            data = request.POST
+            form = AmarreForm(data)
+            opcionPrecio = request.POST.get('opcionPrecio') 
+            if form.is_valid() and opcionPrecio:
+                cd = form.cleaned_data
+                amarre = self.get_object()
+                amarre.nombre = cd.get('nombre')
+                amarre.eslora = cd.get('eslora')
+                amarre.manga = cd.get('manga')
+                amarre.agua = cd.get('agua')
+                amarre.electricidad = cd.get('electricidad')
+                amarre.precio_dia = Precio.objects.get(pk=opcionPrecio)
+                amarre.save()
+        return HttpResponseRedirect(reverse('list_amarres'))
+
 
 @method_decorator([login_required, permission_required('amarreapp.delete_puertos')], name='dispatch')
 class DeleteAmarre(DeleteView):
@@ -454,8 +505,9 @@ class DeleteEmbarcacion(DeleteView):
 
 def search_mooring(request):
     class SearchMooringForm(forms.Form):
-        dias = forms.IntegerField(min_value=1, max_value=5)
+        dias = forms.IntegerField(label=_('Days'), min_value=1, max_value=5)
         fecha_entrada = forms.DateField(
+                                        label=_('Start Date'),
                                         initial=timezone.now().date(),
                                         widget=forms.SelectDateWidget())
         latitud = forms.FloatField(label=_('Lat.'),
@@ -470,7 +522,9 @@ def search_mooring(request):
                                   error_messages={'min_value':'Outside Balearic Islands Region'},
                                   #widget=forms.NumberInput(attrs={'step':'0.00001'})
                                   )
-        embarcacion = forms.ModelChoiceField(queryset=Embarcacion.objects.filter(propietario=request.user))
+        embarcacion = forms.ModelChoiceField(label=_('Boat'),
+            queryset=Embarcacion.objects.filter(propietario=request.user)
+        )
 
 
     if request.method == 'POST':
@@ -550,7 +604,14 @@ def search_mooring(request):
                                                 float("{0:.2f}".format(coste_total))
                                                 ])
             print(tabla_resultados)
-            context_dict = {'object_list': tabla_resultados}
+            # Ordenar por coste total
+            tabla_resultados.sort(key=lambda x:x[4])
+            print(tabla_resultados)
+            # Coger los primeros cinco resultados
+            tabla_truncada = tabla_resultados[0:5]
+            print(tabla_truncada)
+            #context_dict = {'object_list': tabla_resultados}
+            context_dict = {'object_list': tabla_truncada}
             # Return response back to the user, updating any cookies that need changed. 
             response = render(request, 'resultado_amarre.html', context_dict)                      
             return response  
@@ -585,6 +646,9 @@ def calcular_distancias_puerto(posicion, puertos):
                 distancia_a_puerto_mas_cercano = (float(Distancia.objects.filter(origen__nombre=puerto_mas_cercano.nombre, destino__nombre = puerto.nombre).get().distancia_nmi))
             elif (Distancia.objects.filter(origen__nombre=puerto.nombre, destino__nombre=puerto_mas_cercano.nombre)):
                 distancia_a_puerto_mas_cercano = (float(Distancia.objects.filter(origen__nombre=puerto.nombre, destino__nombre = puerto_mas_cercano.nombre).get().distancia_nmi))
+            else:
+                # No se ha introducido distancia entre los puestos .... coger distancia en linia recta
+                distancia_a_puerto_mas_cercano = km2nm(points2distance([puerto_mas_cercano.latitud, puerto_mas_cercano.latitud], [puerto.latitud, puerto.longitud]))
             distancia = distancia_a_puerto_mas_cercano + distancia_menor_nmi
             resultado = [puerto, distancia]
             resultados.append(resultado)

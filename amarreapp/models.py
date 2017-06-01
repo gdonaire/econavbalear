@@ -41,27 +41,31 @@ class Combustible(models.Model):
     updated = models.DateTimeField(_('Updated'), auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return (self.nombre)
+        return (('%s - %3.2f €/l' % (self.nombre, self.precio_litro)))
 
 
 class Embarcacion(models.Model):
     TIPO_MOTOR_CHOICES = (
         ('I', 'Intraborda'),
-        ('F', 'Foraborda'),
+        ('F', 'Fueraborda'),
     )
     nombre = models.CharField(max_length=50, default = " ")
-    matricula = models.CharField(max_length=40, default = " ")
+    matricula = models.CharField(max_length=40, blank=True, default=" ")
     # Dimensiones fisicas de la embarcacion en metros con dos decimales
     eslora = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(4.00), MaxValueValidator(15.99)])
     manga = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(1.00), MaxValueValidator(5.99)])
-    calado = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0.10), MaxValueValidator(3.99)])
+    calado = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0.09), MaxValueValidator(3.99)])
     # Motores
     # TODO: En realidad esto deberia ser una relacion de N a 1 a una 
     # tabla de motores, es decir una embarcacion puede tener muchos motores
     # Numero de motores (1,2,3,4)
-    motor_num = models.PositiveIntegerField()
+    motor_num = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(4)] 
+    )
     # Cubicage del motor (centimetros cubicos o hp (horse power))
-    motor_potencia = models.PositiveIntegerField()
+    motor_potencia = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1)],
+    )
     # Tipo_motor (Intra o Fora)
     motor_tipo = models.CharField(
         max_length=1,
@@ -69,7 +73,9 @@ class Embarcacion(models.Model):
         default='F',
     )
     # consumo regimen crucero (litros/hora)
-    motor_consumo = models.FloatField()
+    motor_consumo = models.FloatField(
+        validators=[MinValueValidator(0.0)],
+    )
     # combustible (OneToOne)
     #motor_combustible = models.OneToOneField(Combustible, 
     motor_combustible = models.ForeignKey(Combustible, 
@@ -78,7 +84,8 @@ class Embarcacion(models.Model):
         on_delete = models.SET_NULL
     )
     # Velocidad de crucero en nudos (millas nauticas/hora)
-    velocidad_kn = models.PositiveIntegerField(default=1,
+    velocidad_kn = models.PositiveSmallIntegerField(default=1,
+        validators=[MinValueValidator(1)],
         blank=False
     )
     # Propietario
@@ -118,18 +125,18 @@ class Precio(models.Model):
     nombre = models.CharField(_('name'),
         max_length=50, 
         default = " ")
-    enero = models.DecimalField(_('January'), max_digits=4, decimal_places=2, default=10.00)
-    febrero = models.DecimalField(_('February'), max_digits=4, decimal_places=2, default=10.00)
-    marzo = models.DecimalField(_('March'), max_digits=4, decimal_places=2, default=10.00)
-    abril = models.DecimalField(_('April'), max_digits=4, decimal_places=2, default=10.00)
-    mayo = models.DecimalField(_('May'), max_digits=4, decimal_places=2, default=10.00)
-    junio = models.DecimalField(_('June'), max_digits=4, decimal_places=2, default=10.00)
-    julio = models.DecimalField(_('July'), max_digits=4, decimal_places=2, default=10.00)
-    agosto = models.DecimalField(_('August'), max_digits=4, decimal_places=2, default=10.00)
-    septiembre = models.DecimalField(_('September'), max_digits=4, decimal_places=2, default=10.00)
-    octubre = models.DecimalField(_('October'), max_digits=4, decimal_places=2, default=10.00)
-    noviembre = models.DecimalField(_('November'), max_digits=4, decimal_places=2, default=10.00)
-    diciembre = models.DecimalField(_('December'), max_digits=4, decimal_places=2, default=10.00)
+    enero = models.DecimalField(_('January'), max_digits=5, decimal_places=2, default=10.00)
+    febrero = models.DecimalField(_('February'), max_digits=5, decimal_places=2, default=10.00)
+    marzo = models.DecimalField(_('March'), max_digits=5, decimal_places=2, default=10.00)
+    abril = models.DecimalField(_('April'), max_digits=5, decimal_places=2, default=10.00)
+    mayo = models.DecimalField(_('May'), max_digits=5, decimal_places=2, default=10.00)
+    junio = models.DecimalField(_('June'), max_digits=5, decimal_places=2, default=10.00)
+    julio = models.DecimalField(_('July'), max_digits=5, decimal_places=2, default=10.00)
+    agosto = models.DecimalField(_('August'), max_digits=5, decimal_places=2, default=10.00)
+    septiembre = models.DecimalField(_('September'), max_digits=5, decimal_places=2, default=10.00)
+    octubre = models.DecimalField(_('October'), max_digits=5, decimal_places=2, default=10.00)
+    noviembre = models.DecimalField(_('November'), max_digits=5, decimal_places=2, default=10.00)
+    diciembre = models.DecimalField(_('December'), max_digits=5, decimal_places=2, default=10.00)
     # Timestamp y updated (creado y modificado)
     timestamp = models.DateTimeField(_('TimeStamp'), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_('Updated'), auto_now=True, auto_now_add=False)
@@ -209,6 +216,8 @@ class Puerto(models.Model):
         default = None,
         on_delete = models.SET_NULL
     )
+    # Distancias a otros puertos
+    distancias = models.ManyToManyField('self', through='Distancia', symmetrical=False)
     # Timestamp y updated (creado y modificado)
     timestamp = models.DateTimeField(_('TimeStamp'), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_('Updated'), auto_now=True, auto_now_add=False)
@@ -238,6 +247,9 @@ class Distancia(models.Model):
     def __str__(self):
         return (self.origen.nombre + '-' + self.destino.nombre)
 
+    class Meta:
+        unique_together = ('origen', 'destino')
+
 
 class Prediccion(models.Model):
     TIPO_ESTADO_DE_LA_MAR_CHOICES = (
@@ -261,12 +273,12 @@ class Prediccion(models.Model):
         ('NE_MA', 'Noreste Mallorca'),
         ('ES_MA', 'Este Mallorca'),
         ('SU_MA', 'Sur Mallorca'),
-        ('CN_ME', 'Canal de Menorca'),
+#        ('CN_ME', 'Canal de Menorca'),
         ('NO_ME', 'Norte Menorca'),
         ('SU_ME', 'Sur Menorca'),
-        ('CN_IB', 'Canal de Ibiza'),
+#        ('CN_IB', 'Canal de Ibiza'),
         ('IBIZA', 'Ibiza'),
-        ('FORMN', 'Formentera'),
+#        ('FORMN', 'Formentera'),
     )
     TIPO_DIRECCION_CHOICES = (
         ('NT', 'Norte'),

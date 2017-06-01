@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^usuario/create$', CreateUsuario.as_view(), name='create_usuario'),
     url(r'^usuario/edit/(?P<pk>\d+)/$', EditUsuario.as_view(), name='edit_usuario'),
     url(r'^usuario/delete/(?P<pk>\d+)/$', DeleteUsuario.as_view(), name='delete_usuario'),
+    url(r'^usuario/edit/password/$', views.change_password, name='edit_password'),
     url(r'^precio$', ListPrecios.as_view(), name='list_precios'),
     url(r'^precio/create$', CreatePrecio.as_view(), name='create_precio'),
     url(r'^precio/edit/(?P<pk>\d+)/$', EditPrecio.as_view(), name='edit_precio'),

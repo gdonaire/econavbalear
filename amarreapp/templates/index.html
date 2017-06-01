@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load auth_extras %}
 {% block content %}
 {% if user.is_authenticated %}
 {% if user.is_superuser %}
@@ -7,40 +8,44 @@
 	align="center" 
 	href="{%url 'list_usuarios' %}"
 	role="button">
-	Gestion Usuario
+	{% trans "Users" %}
 </a>
 {% endif %}
-{% if perms.amarreapp.change_puerto %}
+{% if request.user.is_superuser or request.user|has_group:"gestor_puerto" %}
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_amarres' %}"
 	role="button">
-	Gestion Amarre-Precios
+	{% trans "Moorings" %}
 </a>
-{% endif %}
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_puertos' %}"
 	role="button">
-	Gestion Puerto
+	{% trans "Ports" %}
 </a>
+{% endif %}
+{% if request.user.is_superuser or request.user|has_group:"gestor_combustible" %}
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_combustibles' %}"
 	role="button">
-	Gestion Combustible
+	{% trans "Fuels" %}
 </a>
+{% endif %}
+{% if request.user.is_superuser or request.user|has_group:"gestor_prediccion" %}
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_predicciones' %}"
 	role="button">
-	Gestion Prediccion
+	{% trans "Forecasts" %}
 </a >
+{% endif %}
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_embarcaciones' %}"
 	role="button">
-	Gestion Embarcacion
+	{% trans "My Boats" %}
 </a>
 <a class="btn btn-primary btn-block"
 	align="center" 

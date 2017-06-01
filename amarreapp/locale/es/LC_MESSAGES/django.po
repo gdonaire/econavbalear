@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-26 02:38+0200\n"
+"POT-Creation-Date: 2017-05-30 20:16+0200\n"
 "PO-Revision-Date: 2017-05-05 11:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,15 +18,133 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.1\n"
 
+#: amarreapp/forms.py:29
+msgid "Street"
+msgstr "Calle"
+
+#: amarreapp/forms.py:30
+msgid "City"
+msgstr "Ciudad"
+
+#: amarreapp/forms.py:31
+msgid "Province"
+msgstr "Provincia"
+
+#: amarreapp/forms.py:32
+msgid "Postal code"
+msgstr "Código postal"
+
+#: amarreapp/forms.py:33
+msgid "Country"
+msgstr "País"
+
+#: amarreapp/forms.py:34 amarreapp/templates/usuario_add.html:60
+msgid "E-mail"
+msgstr "Correo electrónico"
+
+#: amarreapp/forms.py:35
+msgid "Phone"
+msgstr "Teléfono"
+
+#: amarreapp/forms.py:36
+msgid "Fax"
+msgstr "Fax"
+
+#: amarreapp/forms.py:37
+msgid "URL"
+msgstr "URL"
+
+#: amarreapp/forms.py:99 amarreapp/forms.py:117 amarreapp/forms.py:143
+#: amarreapp/templates/amarre_add.html:8 amarreapp/templates/amarre_add.html:42
+#: amarreapp/templates/amarre_edit.html:9
+#: amarreapp/templates/amarre_edit.html:43 amarreapp/templates/amarres.html:9
+#: amarreapp/templates/combustibles.html:9
+#: amarreapp/templates/embarcaciones.html:9 amarreapp/templates/precios.html:7
+#: amarreapp/templates/puertos.html:8
+msgid "Name"
+msgstr "Nombre"
+
+#: amarreapp/forms.py:100 amarreapp/templates/puertos.html:8
+msgid "Island"
+msgstr "Isla"
+
+#: amarreapp/forms.py:101 amarreapp/templates/puertos.html:8
+msgid "Latitude"
+msgstr "Latitud"
+
+#: amarreapp/forms.py:102 amarreapp/templates/puertos.html:8
+msgid "Longitude"
+msgstr "Longitud"
+
+#: amarreapp/forms.py:103 amarreapp/templates/amarres.html:4
+msgid "Moorings"
+msgstr "Amarres"
+
+#: amarreapp/forms.py:104
+msgid "Showers"
+msgstr "Duchas"
+
+#: amarreapp/forms.py:105
+msgid "Information"
+msgstr "Información"
+
+#: amarreapp/forms.py:118 amarreapp/templates/combustibles.html:10
+msgid "Type"
+msgstr "Tipo"
+
+#: amarreapp/forms.py:119 amarreapp/templates/combustibles.html:11
+msgid "Price €/l"
+msgstr "Precio €/l"
+
+#: amarreapp/forms.py:144
+msgid "ID.Number"
+msgstr "DNI"
+
+#: amarreapp/forms.py:145
+msgid "Length (m)"
+msgstr "Eslora (m)"
+
+#: amarreapp/forms.py:146
+msgid "Beam (m)"
+msgstr "Manga (m)"
+
+#: amarreapp/forms.py:147
+msgid "Draugth (m)"
+msgstr "Calado (m)"
+
+#: amarreapp/forms.py:148
+msgid "# motor"
+msgstr "# motor"
+
+#: amarreapp/forms.py:149
+msgid "Motor CV"
+msgstr "Motor CV"
+
+#: amarreapp/forms.py:150
+msgid "Motor Type"
+msgstr "Tipo Motor"
+
+#: amarreapp/forms.py:151
+msgid "Consume (l/h)"
+msgstr "Consumo (l/h)"
+
+#: amarreapp/forms.py:152
+msgid "Motor fuel"
+msgstr "Combustible Motor"
+
+#: amarreapp/forms.py:153
+msgid "Velocity (kn)"
+msgstr "Velocidad (kn)"
+
 #: amarreapp/models.py:40 amarreapp/models.py:91 amarreapp/models.py:110
-#: amarreapp/models.py:134 amarreapp/models.py:160 amarreapp/models.py:212
-#: amarreapp/models.py:234 amarreapp/models.py:330
+#: amarreapp/models.py:134 amarreapp/models.py:160 amarreapp/models.py:213
+#: amarreapp/models.py:235 amarreapp/models.py:331
 msgid "TimeStamp"
 msgstr "Fecha de creación"
 
 #: amarreapp/models.py:41 amarreapp/models.py:92 amarreapp/models.py:111
-#: amarreapp/models.py:135 amarreapp/models.py:161 amarreapp/models.py:213
-#: amarreapp/models.py:235 amarreapp/models.py:331
+#: amarreapp/models.py:135 amarreapp/models.py:161 amarreapp/models.py:214
+#: amarreapp/models.py:236 amarreapp/models.py:332
 msgid "Updated"
 msgstr "Fecha de actualización"
 
@@ -59,11 +177,9 @@ msgid "phone"
 msgstr "teléfono"
 
 #: amarreapp/models.py:118 amarreapp/models.py:142 amarreapp/models.py:174
-#: amarreapp/models.py:280
-#, fuzzy
-#| msgid "Username"
+#: amarreapp/models.py:281
 msgid "name"
-msgstr "Nombre de usuario"
+msgstr "nombre"
 
 #: amarreapp/models.py:121 amarreapp/templates/precios.html:7
 msgid "January"
@@ -74,17 +190,15 @@ msgid "February"
 msgstr "Febrero"
 
 #: amarreapp/models.py:123
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "Buscar"
+msgstr "Marzo"
 
 #: amarreapp/models.py:124
 msgid "April"
 msgstr "Abril"
 
-#: amarreapp/models.py:125 amarreapp/templates/amarre_add.html:45
-#: amarreapp/templates/amarres.html:15 amarreapp/templates/amarres_2.html:62
+#: amarreapp/models.py:125 amarreapp/templates/amarre_add.html:47
+#: amarreapp/templates/amarre_edit.html:48 amarreapp/templates/amarres.html:16
 msgid "May"
 msgstr "Mayo"
 
@@ -117,8 +231,6 @@ msgid "December"
 msgstr "Deciembre"
 
 #: amarreapp/models.py:145
-#, fuzzy
-#| msgid "Length"
 msgid "length"
 msgstr "eslora"
 
@@ -139,228 +251,206 @@ msgid "information"
 msgstr "información"
 
 #: amarreapp/models.py:176
-#, fuzzy
-#| msgid "Island"
 msgid "island"
-msgstr "Isla"
+msgstr "isla"
 
 #: amarreapp/models.py:182
-#, fuzzy
-#| msgid "Latitude"
 msgid "latitude"
-msgstr "Latitud"
+msgstr "latitud"
 
 #: amarreapp/models.py:185
-#, fuzzy
-#| msgid "Longitude"
 msgid "longitude"
-msgstr "Longitud"
+msgstr "longitud"
 
 #: amarreapp/models.py:204
 msgid "image"
 msgstr "imagen"
 
-#: amarreapp/models.py:224 amarreapp/models.py:289
+#: amarreapp/models.py:225 amarreapp/models.py:290
 msgid "source"
 msgstr "origen"
 
-#: amarreapp/models.py:230
+#: amarreapp/models.py:231
 msgid "destination"
 msgstr "destino"
 
-#: amarreapp/models.py:232
-#, fuzzy
-#| msgid "Distance (nmi)"
+#: amarreapp/models.py:233
 msgid "distance_nmi"
-msgstr "Distancia (nmi)"
+msgstr "distancia_nmi"
 
-#: amarreapp/models.py:284
+#: amarreapp/models.py:285
 msgid "zone"
 msgstr "zona"
 
-#: amarreapp/models.py:295
-#, fuzzy
-#| msgid "Forecast"
+#: amarreapp/models.py:296
 msgid "forecast"
-msgstr "Predicción"
+msgstr "predicción"
 
-#: amarreapp/models.py:311
+#: amarreapp/models.py:312
 msgid "start_date"
 msgstr "fecha inicio"
 
-#: amarreapp/models.py:316
+#: amarreapp/models.py:317
 msgid "days"
 msgstr "dias"
 
-#: amarreapp/models.py:321
-#, fuzzy
-#| msgid "date"
+#: amarreapp/models.py:322
 msgid "end_date"
 msgstr "fecha fin"
 
-#: amarreapp/templates/amarre_add.html:4
+#: amarreapp/templates/amarre_add.html:4 amarreapp/templates/amarre_edit.html:5
 msgid "Add Mooring"
-msgstr "Añadir Amarres"
+msgstr "Añadir Amarre"
 
-#: amarreapp/templates/amarre_add.html:8 amarreapp/templates/amarre_add.html:40
-#: amarreapp/templates/amarres.html:8 amarreapp/templates/amarres_2.html:57
-#: amarreapp/templates/combustibles.html:7
-#: amarreapp/templates/embarcaciones.html:7 amarreapp/templates/precios.html:7
-#: amarreapp/templates/puertos.html:7
-msgid "Name"
-msgstr "Nombre"
-
-#: amarreapp/templates/amarre_add.html:14 amarreapp/templates/amarres.html:9
+#: amarreapp/templates/amarre_add.html:14
+#: amarreapp/templates/amarre_edit.html:15 amarreapp/templates/amarres.html:10
+#: amarreapp/templates/embarcaciones.html:11
 msgid "Length"
 msgstr "Eslora"
 
-#: amarreapp/templates/amarre_add.html:18 amarreapp/templates/amarres.html:10
+#: amarreapp/templates/amarre_add.html:18
+#: amarreapp/templates/amarre_edit.html:19 amarreapp/templates/amarres.html:11
+#: amarreapp/templates/embarcaciones.html:12
 msgid "Beam"
 msgstr "Manga"
 
-#: amarreapp/templates/amarre_add.html:24 amarreapp/templates/amarres_2.html:31
-#, fuzzy
-#| msgid "water"
+#: amarreapp/templates/amarre_add.html:24
+#: amarreapp/templates/amarre_edit.html:25
 msgid "Water"
-msgstr "agua"
+msgstr "Agua"
 
-#: amarreapp/templates/amarre_add.html:29 amarreapp/templates/amarres_2.html:35
-#, fuzzy
-#| msgid "electricity"
+#: amarreapp/templates/amarre_add.html:29
+#: amarreapp/templates/amarre_edit.html:30
 msgid "Electricity"
-msgstr "electricidad"
+msgstr "Electricidad"
 
-#: amarreapp/templates/amarre_add.html:41 amarreapp/templates/amarres.html:11
-#: amarreapp/templates/amarres_2.html:58
-#, fuzzy
-#| msgid "January"
+#: amarreapp/templates/amarre_add.html:36
+#: amarreapp/templates/amarre_edit.html:37 amarreapp/templates/precios.html:4
+msgid "Price"
+msgstr "Precio"
+
+#: amarreapp/templates/amarre_add.html:43
+#: amarreapp/templates/amarre_edit.html:44 amarreapp/templates/amarres.html:12
 msgid "Jan"
-msgstr "Enero"
+msgstr "Ene"
 
-#: amarreapp/templates/amarre_add.html:42 amarreapp/templates/amarres.html:12
-#: amarreapp/templates/amarres_2.html:59
+#: amarreapp/templates/amarre_add.html:44
+#: amarreapp/templates/amarre_edit.html:45 amarreapp/templates/amarres.html:13
 msgid "Feb"
 msgstr "Feb"
 
-#: amarreapp/templates/amarre_add.html:43 amarreapp/templates/amarres.html:13
-#: amarreapp/templates/amarres_2.html:60
-#, fuzzy
-#| msgid "Search"
+#: amarreapp/templates/amarre_add.html:45
+#: amarreapp/templates/amarre_edit.html:46 amarreapp/templates/amarres.html:14
 msgid "Mar"
-msgstr "Marzo"
+msgstr "Mar"
 
-#: amarreapp/templates/amarre_add.html:44 amarreapp/templates/amarres.html:14
-#: amarreapp/templates/amarres_2.html:61
-#, fuzzy
-#| msgid "April"
+#: amarreapp/templates/amarre_add.html:46
+#: amarreapp/templates/amarre_edit.html:47 amarreapp/templates/amarres.html:15
 msgid "Apr"
-msgstr "Abril"
+msgstr "Abr"
 
-#: amarreapp/templates/amarre_add.html:46 amarreapp/templates/amarres.html:16
-#: amarreapp/templates/amarres_2.html:63
-#, fuzzy
-#| msgid "June"
+#: amarreapp/templates/amarre_add.html:48
+#: amarreapp/templates/amarre_edit.html:49 amarreapp/templates/amarres.html:17
 msgid "Jun"
-msgstr "Junio"
+msgstr "Jun"
 
-#: amarreapp/templates/amarre_add.html:47 amarreapp/templates/amarres.html:17
-#: amarreapp/templates/amarres_2.html:64
-#, fuzzy
-#| msgid "July"
+#: amarreapp/templates/amarre_add.html:49
+#: amarreapp/templates/amarre_edit.html:50 amarreapp/templates/amarres.html:18
 msgid "Jul"
-msgstr "Julio"
+msgstr "Jul"
 
-#: amarreapp/templates/amarre_add.html:48 amarreapp/templates/amarres.html:18
-#: amarreapp/templates/amarres_2.html:65
-#, fuzzy
-#| msgid "August"
+#: amarreapp/templates/amarre_add.html:50
+#: amarreapp/templates/amarre_edit.html:51 amarreapp/templates/amarres.html:19
 msgid "Aug"
-msgstr "Agosto"
+msgstr "Ago"
 
-#: amarreapp/templates/amarre_add.html:49 amarreapp/templates/amarres.html:19
-#: amarreapp/templates/amarres_2.html:66
+#: amarreapp/templates/amarre_add.html:51
+#: amarreapp/templates/amarre_edit.html:52 amarreapp/templates/amarres.html:20
 msgid "Sep"
 msgstr "Sep"
 
-#: amarreapp/templates/amarre_add.html:50 amarreapp/templates/amarres.html:20
-#: amarreapp/templates/amarres_2.html:67
-#, fuzzy
-#| msgid "October"
+#: amarreapp/templates/amarre_add.html:52
+#: amarreapp/templates/amarre_edit.html:53 amarreapp/templates/amarres.html:21
 msgid "Oct"
-msgstr "Octubre"
+msgstr "Oct"
 
-#: amarreapp/templates/amarre_add.html:51 amarreapp/templates/amarres.html:21
-#: amarreapp/templates/amarres_2.html:68
+#: amarreapp/templates/amarre_add.html:53
+#: amarreapp/templates/amarre_edit.html:54 amarreapp/templates/amarres.html:22
 msgid "Nov"
 msgstr "Nov"
 
-#: amarreapp/templates/amarre_add.html:52 amarreapp/templates/amarres.html:22
-#: amarreapp/templates/amarres_2.html:69
+#: amarreapp/templates/amarre_add.html:54
+#: amarreapp/templates/amarre_edit.html:55 amarreapp/templates/amarres.html:23
 msgid "Dec"
 msgstr "Dec"
 
-#: amarreapp/templates/amarreapp/amarre_form.html:9
-#: amarreapp/templates/amarreapp/combustible_form.html:9
-#: amarreapp/templates/amarreapp/precio_form.html:9
-#: amarreapp/templates/puerto_add.html:15
-msgid "Save"
-msgstr "Grabar"
+#: amarreapp/templates/amarre_add.html:81
+#: amarreapp/templates/amarre_edit.html:83
+msgid "Change selected price"
+msgstr "Cambiar precio seleccionado"
 
-#: amarreapp/templates/amarres.html:4
-msgid "Moorings"
-msgstr "Amarres"
+#: amarreapp/templates/amarre_add.html:82
+#: amarreapp/templates/amarre_edit.html:84
+#: amarreapp/templates/combustibles.html:25
+#: amarreapp/templates/embarcaciones.html:27
+#: amarreapp/templates/predicciones.html:28 amarreapp/templates/puertos.html:20
+#: amarreapp/templates/usuarios.html:34
+msgid "Change"
+msgstr "Cambiar"
 
-#: amarreapp/templates/amarres.html:48 amarreapp/templates/combustibles.html:19
-#: amarreapp/templates/embarcaciones.html:17
-#: amarreapp/templates/precios.html:19 amarreapp/templates/predicciones.html:21
-#: amarreapp/templates/puertos.html:20 amarreapp/templates/usuarios.html:26
-msgid "Edit"
-msgstr "Editar"
+#: amarreapp/templates/amarre_add.html:88
+#: amarreapp/templates/amarre_edit.html:90
+msgid "Delete selected price"
+msgstr "Borrar precio seleccionado"
 
-#: amarreapp/templates/amarres.html:53 amarreapp/templates/combustibles.html:24
-#: amarreapp/templates/embarcaciones.html:20
-#: amarreapp/templates/precios.html:24 amarreapp/templates/predicciones.html:26
-#: amarreapp/templates/puertos.html:25 amarreapp/templates/usuarios.html:29
+#: amarreapp/templates/amarre_add.html:89
+#: amarreapp/templates/amarre_edit.html:91
+#: amarreapp/templates/combustibles.html:32
+#: amarreapp/templates/embarcaciones.html:32
+#: amarreapp/templates/precios.html:24 amarreapp/templates/predicciones.html:35
+#: amarreapp/templates/puertos.html:27 amarreapp/templates/usuarios.html:39
 msgid "Delete"
 msgstr "Borrar"
 
-#: amarreapp/templates/amarres.html:68 amarreapp/templates/combustibles.html:39
-#: amarreapp/templates/embarcaciones.html:33
-#: amarreapp/templates/precios.html:39 amarreapp/templates/predicciones.html:41
-#: amarreapp/templates/puerto_list.html:37 amarreapp/templates/puertos.html:40
-#: amarreapp/templates/usuarios.html:44
+#: amarreapp/templates/amarre_add.html:98
+#: amarreapp/templates/amarre_add.html:99
+#: amarreapp/templates/amarre_edit.html:100
+#: amarreapp/templates/amarre_edit.html:101
+msgid "Add Price"
+msgstr "Añadir Precio"
+
+#: amarreapp/templates/amarre_add.html:106
+#: amarreapp/templates/amarreapp/amarre_form.html:13
+#: amarreapp/templates/amarreapp/combustible_form.html:15
+#: amarreapp/templates/amarreapp/embarcacion_form.html:13
+#: amarreapp/templates/amarreapp/precio_form.html:13
+#: amarreapp/templates/amarreapp/prediccion_form.html:13
+#: amarreapp/templates/amarreapp/puerto_form.html:13
+#: amarreapp/templates/auth/user_form.html:21
+#: amarreapp/templates/puerto_add.html:14
+msgid "Save"
+msgstr "Grabar"
+
+#: amarreapp/templates/amarres.html:50
+msgid "Change selected mooring"
+msgstr "Cambiar amarre seleccionado"
+
+#: amarreapp/templates/amarres.html:57
+msgid "Delete selected mooring"
+msgstr "Borrar amarre seleccionado"
+
+#: amarreapp/templates/amarres.html:74 amarreapp/templates/combustibles.html:47
+#: amarreapp/templates/embarcaciones.html:45
+#: amarreapp/templates/precios.html:39 amarreapp/templates/predicciones.html:50
+#: amarreapp/templates/puertos.html:42 amarreapp/templates/usuarios.html:54
 msgid "Add"
 msgstr "Añadir"
 
-#: amarreapp/templates/amarres_2.html:10
-#, fuzzy
-#| msgid "Name"
-msgid "Name:"
-msgstr "Nombre"
-
-#: amarreapp/templates/amarres_2.html:18
-#, fuzzy
-#| msgid "Length"
-msgid "Length:"
-msgstr "Eslora"
-
-#: amarreapp/templates/amarres_2.html:24
-#, fuzzy
-#| msgid "Beam"
-msgid "Beam:"
-msgstr "Manga"
-
-#: amarreapp/templates/amarres_2.html:40
-#, fuzzy
-#| msgid "information"
-msgid "Information"
-msgstr "información"
-
-#: amarreapp/templates/buscar_amarre.html:4
+#: amarreapp/templates/buscar_amarre.html:5
 msgid "Search Moorings"
 msgstr "Buscar Amarres"
 
-#: amarreapp/templates/buscar_amarre.html:10
+#: amarreapp/templates/buscar_amarre.html:14
 msgid "Search"
 msgstr "Buscar"
 
@@ -368,91 +458,97 @@ msgstr "Buscar"
 msgid "Fuel"
 msgstr "Carburantes"
 
-#: amarreapp/templates/combustibles.html:7
-msgid "Type"
-msgstr "Tipo"
+#: amarreapp/templates/combustibles.html:12
+msgid "Date"
+msgstr "Fecha"
 
-#: amarreapp/templates/combustibles.html:7
-msgid "Price €/l"
-msgstr "Precio €/l"
+#: amarreapp/templates/combustibles.html:24
+msgid "Change selected fuel"
+msgstr "Cambiar carburante seleccionado"
+
+#: amarreapp/templates/combustibles.html:31
+msgid "Delete selected fuel"
+msgstr "Borrar carburante seleccionado"
 
 #: amarreapp/templates/embarcaciones.html:4
 msgid "Boats"
 msgstr "Embarcaciones"
 
-#: amarreapp/templates/embarcaciones.html:7
+#: amarreapp/templates/embarcaciones.html:10
 msgid "Registration number"
 msgstr "Matricula"
+
+#: amarreapp/templates/embarcaciones.html:13
+msgid "Draught"
+msgstr "Calado"
+
+#: amarreapp/templates/embarcaciones.html:26
+msgid "Change selected boat"
+msgstr "Cambiar embarcacion seleccionada"
+
+#: amarreapp/templates/embarcaciones.html:31
+msgid "Delete selected boat"
+msgstr "Borrar embarcacion seleccionada"
 
 #: amarreapp/templates/index.html:49
 msgid "Search Mooring"
 msgstr "Buscar Amarre"
 
-#: amarreapp/templates/precios.html:4
-#, fuzzy
-#| msgid "Price €/l"
-msgid "Price"
-msgstr "Precio €/l"
+#: amarreapp/templates/precios.html:19
+msgid "Edit"
+msgstr "Editar"
 
 #: amarreapp/templates/predicciones.html:4
 msgid "Forecasts"
 msgstr "Predicciones"
 
-#: amarreapp/templates/predicciones.html:7
+#: amarreapp/templates/predicciones.html:9
 msgid "Zone"
 msgstr "Zona"
 
-#: amarreapp/templates/predicciones.html:7
+#: amarreapp/templates/predicciones.html:10 amarreapp/views.py:459
 msgid "Start Date"
 msgstr "Fecha inicio"
 
-#: amarreapp/templates/predicciones.html:7
+#: amarreapp/templates/predicciones.html:11
 msgid "End Date"
 msgstr "Fecha Final"
 
-#: amarreapp/templates/predicciones.html:7
+#: amarreapp/templates/predicciones.html:12
 msgid "State"
 msgstr "Estado de la mar"
 
-#: amarreapp/templates/predicciones.html:7
+#: amarreapp/templates/predicciones.html:13
 msgid "Forecast"
 msgstr "Predicción"
 
-#: amarreapp/templates/puerto_add.html:11
-msgid "Contact"
-msgstr "Contacto"
+#: amarreapp/templates/predicciones.html:27
+msgid "Change selected forecast"
+msgstr "Cambiar prediccion seleccionada"
 
-#: amarreapp/templates/puerto_add.html:19
-msgid "Cancel"
-msgstr "Cancelar"
+#: amarreapp/templates/predicciones.html:34
+msgid "Delete selected forecast"
+msgstr "Borrar prediccion seleccionada"
 
 #: amarreapp/templates/puertos.html:4
 msgid "Ports"
 msgstr "Puertos"
 
-#: amarreapp/templates/puertos.html:7
-#, fuzzy
-#| msgid "Island"
-msgid "Island"
-msgstr "Isla"
+#: amarreapp/templates/puertos.html:19
+msgid "Change selected port"
+msgstr "Cambiar puerto seleccionado"
 
-#: amarreapp/templates/puertos.html:7
-msgid "Latitude"
-msgstr "Latitud"
-
-#: amarreapp/templates/puertos.html:7
-msgid "Longitude"
-msgstr "Longitud"
+#: amarreapp/templates/puertos.html:26
+msgid "Delete selected port"
+msgstr "Borrar puerto seleccionado"
 
 #: amarreapp/templates/resultado_amarre.html:4
 msgid "Moorings port"
 msgstr "Amarres de puerto"
 
 #: amarreapp/templates/resultado_amarre.html:7
-#, fuzzy
-#| msgid "Ports"
 msgid "Port"
-msgstr "Puertos"
+msgstr "Puerto"
 
 #: amarreapp/templates/resultado_amarre.html:7
 msgid "Distance (nmi)"
@@ -478,43 +574,119 @@ msgstr "No hay puertos disponibles."
 msgid "New Search"
 msgstr "Nueva búsqueda"
 
-#: amarreapp/templates/usuarios.html:4
-#, fuzzy
-#| msgid "Username"
-msgid "Users"
-msgstr "Usuarios"
+#: amarreapp/templates/usuario_add.html:4
+msgid "Add User"
+msgstr "Añadir Usuario"
 
-#: amarreapp/templates/usuarios.html:7
+#: amarreapp/templates/usuario_add.html:9 amarreapp/templates/usuarios.html:9
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: amarreapp/templates/usuarios.html:7
-msgid "Email Address"
-msgstr "Dirección de correo electrónico"
+#: amarreapp/templates/usuario_add.html:22
+msgid "Password"
+msgstr "Contraseña"
 
-#: amarreapp/templates/usuarios.html:7
+#: amarreapp/templates/usuario_add.html:29
+msgid "Password (Confirm)"
+msgstr "Contraseña (Confirmacion)"
+
+#: amarreapp/templates/usuario_add.html:37 amarreapp/templates/usuarios.html:11
 msgid "First Name"
 msgstr "Nombre"
 
-#: amarreapp/templates/usuarios.html:7
+#: amarreapp/templates/usuario_add.html:47 amarreapp/templates/usuarios.html:12
 msgid "Last Name"
 msgstr "Apellidos"
 
-#: amarreapp/templates/usuarios.html:7
+#: amarreapp/templates/usuario_add.html:70
+msgid "Is superuser"
+msgstr "Es administrador?"
+
+#: amarreapp/templates/usuario_add.html:74
+msgid "Profile"
+msgstr "Perfil"
+
+#: amarreapp/templates/usuario_add.html:88
+msgid "Groups:"
+msgstr "Grupos:"
+
+#: amarreapp/templates/usuario_add.html:91
+msgid "Port manager"
+msgstr "Gestor de puertos"
+
+#: amarreapp/templates/usuario_add.html:97
+msgid "Fuel Manager"
+msgstr "Gestor de combustibles"
+
+#: amarreapp/templates/usuario_add.html:103
+msgid "Forecast manager"
+msgstr "Gestor de predicciones"
+
+#: amarreapp/templates/usuarios.html:4
+msgid "Users"
+msgstr "Usuarios"
+
+#: amarreapp/templates/usuarios.html:10
+msgid "Email Address"
+msgstr "Dirección de correo electrónico"
+
+#: amarreapp/templates/usuarios.html:13
 msgid "Superuser"
 msgstr "Superusuario"
 
-#: amarreapp/templates/usuarios.html:7
+#: amarreapp/templates/usuarios.html:14
 msgid "Groups"
 msgstr "Grupos"
 
-#: amarreapp/views.py:411
+#: amarreapp/templates/usuarios.html:33
+msgid "Change selected user"
+msgstr "Cambiar usuario seleccionado"
+
+#: amarreapp/templates/usuarios.html:38
+msgid "Delete selected user"
+msgstr "Borrar usuario seleccionado"
+
+#: amarreapp/views.py:457
+msgid "Days"
+msgstr "Dias"
+
+#: amarreapp/views.py:462
 msgid "Lat."
 msgstr "Lat."
 
-#: amarreapp/views.py:417
+#: amarreapp/views.py:468
 msgid "Long."
 msgstr "Long."
+
+#: amarreapp/views.py:474
+msgid "Boat"
+msgstr "Embarcaciones"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Name:"
+#~ msgstr "Nombre"
+
+#, fuzzy
+#~| msgid "Length"
+#~ msgid "Length:"
+#~ msgstr "Eslora"
+
+#, fuzzy
+#~| msgid "Beam"
+#~ msgid "Beam:"
+#~ msgstr "Manga"
+
+#, fuzzy
+#~| msgid "Latitude"
+#~ msgid "Lattitude"
+#~ msgstr "Latitud"
+
+#~ msgid "Contact"
+#~ msgstr "Contacto"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
 
 #~ msgid "Rampa"
 #~ msgstr "Rampa"

@@ -1,10 +1,11 @@
 from __future__ import absolute_import
+from django import forms
 from django.forms import CharField, PasswordInput, BooleanField
 from django.forms import ValidationError
 from django.forms import ModelForm
-from django.forms import SelectDateWidget, NumberInput, CheckboxSelectMultiple
+from django.forms import SelectDateWidget, NumberInput, CheckboxSelectMultiple, Select
 from django.forms import inlineformset_factory 
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation 
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -25,6 +26,17 @@ class FormContacto(ModelForm):
         model = Contacto 
         fields = ('domicilio', 'localidad', 'provincia', 'codigo_postal',
                   'pais', 'correo_electronico', 'telefono', 'fax', 'url')
+        labels = {
+            'domicilio': _('Street'), 
+            'localidad': _('City'),
+            'provincia': _('Province'),
+            'codigo_postal': _('Postal code'),
+            'pais': _('Country'),
+            'correo_electronico': _('E-mail'),
+            'telefono': _('Phone'),
+            'fax': _('Fax'),
+            'url': _('URL'),
+        }
 
 #ContactoFormSet = inlineformset_factory(Puerto, Contacto, form=FormContacto, extra=0)
 
@@ -53,9 +65,33 @@ class UsuarioCreationForm(UserCreationForm):
 
 
 class UsuarioChangeForm(UserChangeForm):
+    password = ReadOnlyPasswordHashField(
+        label = _("Password"),
+        help_text = _("Feature not allowed")
+    #                 "this user's password, change password is not allowed")
+        )
+
     class Meta:
         model = User
         exclude = ['is_staff', 'user_permissions', 'date_joined', 'last_login']
+
+
+class reset_form(forms.Form):
+    oldpassword = forms.CharField(max_length = 20, 
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'your old Password',  'class' : 'span'})
+    )
+    newpassword1 = forms.CharField(max_length = 20,
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'New Password',  'class' : 'span'})
+    )
+    newpassword2 = forms.CharField(max_length = 20, 
+        widget=forms.TextInput(attrs={'type':'password', 'placeholder':'Confirm New Password',  'class' : 'span'})
+    )
+
+    def clean(self):
+        if 'newpassword1' in self.cleaned_data and 'newpassword2' in self.cleaned_data:
+            if self.cleaned_data['newpassword1'] != self.cleaned_data['newpassword2']:
+                raise forms.ValidationError(_("The two password fields did not match."))
+        return self.cleaned_data
 
 
 class PrecioForm(ModelForm):
@@ -87,7 +123,7 @@ class PuertoForm(ModelForm):
         labels = {
             'nombre': _('Name'), 
             'isla': _('Island'),
-            'latitud': _('Lattitude'),
+            'latitud': _('Latitude'),
             'longitud': _('Longitude'),
             'amarre': _('Moorings'),
             'duchas': _('Showers'),
@@ -102,6 +138,11 @@ class CombustibleForm(ModelForm):
     class Meta:
         model = Combustible
         fields = ('nombre', 'tipo', 'precio_litro')
+        labels = {
+            'nombre': _('Name'), 
+            'tipo': _('Type'),
+            'precio_litro': _('Price €/l'),
+        }
         widgets = {
             'precio_litro': NumberInput(attrs={'min': '0.00',}),
         }
@@ -109,9 +150,19 @@ class CombustibleForm(ModelForm):
 
 class PrediccionForm(ModelForm):
     class Meta:
+        ZONA_CHOICES = (
+            ('NO_MA', 'Noroeste Mallorca'),
+            ('NE_MA', 'Noreste Mallorca'),
+            ('ES_MA', 'Este Mallorca'),
+            ('SU_MA', 'Sur Mallorca'),
+            ('NO_ME', 'Norte Menorca'),
+            ('SU_ME', 'Sur Menorca'),
+            ('IBIZA', 'Ibiza'),
+        )
         model = Prediccion 
         exclude = ['autor', 'fecha_fin', 'timestamp', 'updated']
         widgets = {
+            'zona': Select(choices=ZONA_CHOICES),
             'fecha': SelectDateWidget(),
         }
 
@@ -119,7 +170,7 @@ class PrediccionForm(ModelForm):
 class EmbarcacionForm(ModelForm):
     class Meta:
         model = Embarcacion 
-        fields = ('nombre', 'matricula',
+        fields = ('nombre', 
                   'eslora', 'manga', 'calado', 
                   'motor_num', 'motor_potencia', 'motor_tipo',
                   'motor_consumo', 'motor_combustible', 'velocidad_kn')
@@ -135,4 +186,13 @@ class EmbarcacionForm(ModelForm):
             'motor_consumo': _('Consume (l/h)'),
             'motor_combustible': _('Motor fuel'),
             'velocidad_kn': _('Velocity (kn)'),
+        }
+        widgets = {
+            'eslora': NumberInput(attrs={'min': '4.00','max':'15.99',}),
+            'manga': NumberInput(attrs={'min': '1.00','max':'5.99',}),
+            'calado': NumberInput(attrs={'min': '0.10','max':'3.99',}),
+            'motor_num': NumberInput(attrs={'min': '1','max':'4',}),
+            'motor_potencia': NumberInput(attrs={'min': '1',}),
+            'motor_consumo': NumberInput(attrs={'min': '0',}),
+            'velocidad_kn': NumberInput(attrs={'min': '1',}),
         }

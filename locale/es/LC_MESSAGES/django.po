@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-26 02:38+0200\n"
+"POT-Creation-Date: 2017-06-01 16:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr "Puede iniciar sesión."
 
 #: templates/registration/activation_complete_admin_pending.html:10
 msgid "Once a site administrator activates your account you can login."
-msgstr "Una veq que un administrador active su cuenta podrá iniciar sesión."
+msgstr "Una vez que un administrador active su cuenta podrá iniciar sesión."
 
 #: templates/registration/activation_email.html:6
 #: templates/registration/admin_approve_email.html:6
@@ -79,7 +79,7 @@ msgstr ""
 "    Usted (o alguien que pretende ser usted) ha pedido que registre una "
 "cuenta en\n"
 "    %(site_name)s. Si esto no fuese asi, por favor ignore este correo y\n"
-"    su correo sera borrado de nuestras listas.\n"
+"    su correo será borrado de nuestras listas.\n"
 "    "
 
 #: templates/registration/activation_email.html:18
@@ -93,7 +93,7 @@ msgid ""
 msgstr ""
 "\n"
 "    Para activar esta cuenta, haga click en el siguiente enlace dentro de\n"
-"    los próximos %(expiration_days)s dias:\n"
+"    los próximos %(expiration_days)s días:\n"
 "    "
 
 #: templates/registration/activation_email.html:30
@@ -128,8 +128,8 @@ msgstr ""
 "\n"
 "    Usted (o alguien que pretende ser usted) ha pedido que registre una "
 "cuenta en\n"
-"    %(site_name)s. Si esto no fuese asi, por favor ignore este correo y\n"
-"    su correo sera borrado de nuestras listas.\n"
+"    %(site_name)s. Si esto no fuese así, por favor ignore este correo y\n"
+"    su correo será borrado de nuestras listas.\n"
 "    "
 
 #: templates/registration/activation_email.txt:7
@@ -147,7 +147,7 @@ msgid ""
 msgstr ""
 "\n"
 "    Para activar esta cuenta, haga click en el siguiente enlace dentro de\n"
-"    los próximos %(expiration_days)s dias:\n"
+"    los próximos %(expiration_days)s días:\n"
 "    "
 
 #: templates/registration/activation_email.txt:14
@@ -192,7 +192,7 @@ msgstr "La cuenta de usuario ha sido aprobada."
 
 #: templates/registration/admin_approve_complete_email.html:6
 msgid "admin approval"
-msgstr "aprobación del administrador"
+msgstr "Aprobación del administrador"
 
 #: templates/registration/admin_approve_complete_email.html:11
 msgid ""
@@ -290,6 +290,10 @@ msgstr "Aprobación de Cuenta Fallida"
 msgid "Log in"
 msgstr "Iniciar sesión"
 
+#: templates/registration/login.html:14
+msgid "Sign in"
+msgstr "Registrarse"
+
 #: templates/registration/logout.html:4
 msgid "Logged out"
 msgstr "Cerrar sesión"
@@ -304,16 +308,19 @@ msgstr "Contraseña cambiada"
 
 #: templates/registration/password_change_done.html:7
 msgid "Password successfully changed!"
-msgstr "¡Contraseña correctamente cambiado"
+msgstr "¡Contraseña correctamente cambiada"
 
 #: templates/registration/password_change_form.html:4
-#: templates/registration/password_change_form.html:10
 msgid "Change password"
 msgstr "Cambie contraseña"
 
+#: templates/registration/password_change_form.html:15
+msgid "Change"
+msgstr "Cambiar"
+
 #: templates/registration/password_reset_complete.html:4
 msgid "Password reset complete"
-msgstr "Restablecimiento de contraseña completa"
+msgstr "Restablecimiento de contraseña completo"
 
 #: templates/registration/password_reset_complete.html:8
 msgid "Your password has been reset!"
@@ -368,7 +375,7 @@ msgid ""
 "wish to reset your password, please ignore this message.\n"
 msgstr ""
 "\n"
-"Esta recibiendo este correo porque usted (o alguien quepretende ser usted) "
+"Esta recibiendo este correo porque usted (o alguien que pretende ser usted) "
 "ha solicitado que se restablezca su contraseña en el sitio web %(domain)s.\n"
 "Si no lo solicitó, por favor ignore este mensaje.\n"
 
@@ -419,7 +426,8 @@ msgstr "El registro no está disponible"
 #: templates/registration/registration_closed.html:7
 msgid "Sorry, but registration is closed at this moment. Come back later."
 msgstr ""
-"Lo sentimos, pero el no está disponible en este momento. Inténtelo más tarde."
+"Lo sentimos, pero el registro no está disponible en este momento. Inténtelo "
+"más tarde."
 
 #: templates/registration/registration_complete.html:4
 msgid "Activation email sent"
@@ -428,7 +436,7 @@ msgstr "Correo electrónico de activación enviado"
 #: templates/registration/registration_complete.html:7
 msgid "Please check your email to complete the registration process."
 msgstr ""
-"Por favor, comprueba su correo electrónico para completar el proceso de "
+"Por favor, compruebe su correo electrónico para completar el proceso de "
 "registro."
 
 #: templates/registration/registration_form.html:4
@@ -462,4 +470,4 @@ msgstr ""
 
 #: templates/registration/resend_activation_form.html:4
 msgid "Resend Activation Email"
-msgstr "Reenviar corre electrónico de activación"
+msgstr "Reenviar correo electrónico de activación"
