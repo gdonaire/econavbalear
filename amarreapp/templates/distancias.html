@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load auth_extras %}
+{% block content %}
+<h1>{% trans 'Distances' %}</h1>
+    {% if object_list %}
+    <table class="table table-striped">                                 
+      <tr><th>{% trans "From" %}</th><th>{% trans "To" %}</th><th>{% trans "Distance (nmi)" %}</th><th></th></tr>
+      {% for distance in object_list %}
+      <tr>
+        <td>{{ distance.origen }}</td>
+        <td>{{ distance.destino }}</td>
+        <td>{{ distance.distancia_nmi }}</td>
+        <td>
+          {% if request.user.is_superuser or request.user|has_group:"gestor_puerto" %}
+          <a class="related-widget-wrapper-link change-related" id="change_id_distance"
+	     href="{% url 'edit_distancia' pk=distance.id %}?amp;_popup=1"
+	     title="{% trans 'Change selected distance' %}">
+	    <img src="/static/admin/img/icon-changelink.svg" alt="{% trans 'Change' %}"/>
+          </a>
+          <a class="related-widget-wrapper-link delete-related" id="delete_id_distance"
+	     href="{% url 'delete_distancia' pk=distance.id %}?&amp;_popup=1"
+	     title="{% trans 'Delete selected distance' %}">
+	    <img src="/static/admin/img/icon-deletelink.svg" alt="{% trans 'Delete' %}"/>
+          </a>
+	  {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %} 
+    {% if request.user.is_superuser or request.user|has_group:"gestor_puerto" %}
+    <form role="form" id="distancias_form" method="post" action="{% url 'list_distancias' %}">
+    {% csrf_token %}
+	  <button class="btn btn-primary btn-block"  align="center" 
+		  type="submit" name="order" value="add">
+	    {% trans 'Add' %}
+	  </button>
+    </form>
+    {% endif %} 
+{% endblock %}

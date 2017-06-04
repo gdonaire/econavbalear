@@ -4,6 +4,7 @@ from . import views
 from .views import ListUsuarios, CreateUsuario, EditUsuario, DeleteUsuario
 from .views import ListPrecios, CreatePrecio, EditPrecio, DeletePrecio
 from .views import ListAmarres, CreateAmarre, EditAmarre, DeleteAmarre
+from .views import ListDistancias, CreateDistancia, EditDistancia, DeleteDistancia
 from .views import ListPuertos, CreatePuerto, EditPuerto, DeletePuerto
 from .views import ListCombustibles, CreateCombustible, EditCombustible, DeleteCombustible
 from .views import ListPredicciones, CreatePrediccion, EditPrediccion, DeletePrediccion
@@ -24,6 +25,11 @@ urlpatterns = [
     url(r'^amarre/create$', CreateAmarre.as_view(), name='create_amarre'),
     url(r'^amarre/edit/(?P<pk>\d+)/$', EditAmarre.as_view(), name='edit_amarre'),
     url(r'^amarre/delete/(?P<pk>\d+)/$', DeleteAmarre.as_view(), name='delete_amarre'),
+    url(r'^distancia$', ListDistancias.as_view(), name='list_distancias'),
+    url(r'^distancia/create$', CreateDistancia.as_view(), name='create_distancia'),
+    url(r'^distancia/edit/(?P<pk>\d+)/$', EditDistancia.as_view(), name='edit_distancia'),
+    url(r'^distancia/delete/(?P<pk>\d+)/$', DeleteDistancia.as_view(), name='delete_distancia'),
+    url(r'^amarre$', ListAmarres.as_view(), name='list_amarres'),
     url(r'^puerto$', ListPuertos.as_view(), name='list_puertos'),
     url(r'^puerto/create$', CreatePuerto.as_view(), name='create_puerto'),
     url(r'^puerto/edit/(?P<pk>\d+)/$', EditPuerto.as_view(), name='edit_puerto'),

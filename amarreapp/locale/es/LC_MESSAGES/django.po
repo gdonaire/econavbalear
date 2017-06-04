@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 20:16+0200\n"
+"POT-Creation-Date: 2017-06-04 04:12+0200\n"
 "PO-Revision-Date: 2017-05-05 11:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,43 +18,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.1\n"
 
-#: amarreapp/forms.py:29
+#: amarreapp/forms.py:31
 msgid "Street"
 msgstr "Calle"
 
-#: amarreapp/forms.py:30
+#: amarreapp/forms.py:32
 msgid "City"
 msgstr "Ciudad"
 
-#: amarreapp/forms.py:31
+#: amarreapp/forms.py:33
 msgid "Province"
 msgstr "Provincia"
 
-#: amarreapp/forms.py:32
+#: amarreapp/forms.py:34
 msgid "Postal code"
 msgstr "Código postal"
 
-#: amarreapp/forms.py:33
+#: amarreapp/forms.py:35
 msgid "Country"
 msgstr "País"
 
-#: amarreapp/forms.py:34 amarreapp/templates/usuario_add.html:60
+#: amarreapp/forms.py:36 amarreapp/templates/usuario_add.html:60
 msgid "E-mail"
 msgstr "Correo electrónico"
 
-#: amarreapp/forms.py:35
+#: amarreapp/forms.py:37
 msgid "Phone"
 msgstr "Teléfono"
 
-#: amarreapp/forms.py:36
+#: amarreapp/forms.py:38
 msgid "Fax"
 msgstr "Fax"
 
-#: amarreapp/forms.py:37
+#: amarreapp/forms.py:39
 msgid "URL"
 msgstr "URL"
 
-#: amarreapp/forms.py:99 amarreapp/forms.py:117 amarreapp/forms.py:143
+#: amarreapp/forms.py:70 amarreapp/templates/usuario_add.html:22
+msgid "Password"
+msgstr "Contraseña"
+
+#: amarreapp/forms.py:71
+msgid "Feature not allowed"
+msgstr "Caracteristica no disponible"
+
+#: amarreapp/forms.py:94
+msgid "The two password fields did not match."
+msgstr "Los dos passwords no coinciden"
+
+#: amarreapp/forms.py:131 amarreapp/forms.py:149 amarreapp/forms.py:185
 #: amarreapp/templates/amarre_add.html:8 amarreapp/templates/amarre_add.html:42
 #: amarreapp/templates/amarre_edit.html:9
 #: amarreapp/templates/amarre_edit.html:43 amarreapp/templates/amarres.html:9
@@ -64,237 +76,238 @@ msgstr "URL"
 msgid "Name"
 msgstr "Nombre"
 
-#: amarreapp/forms.py:100 amarreapp/templates/puertos.html:8
+#: amarreapp/forms.py:132 amarreapp/templates/puertos.html:8
 msgid "Island"
 msgstr "Isla"
 
-#: amarreapp/forms.py:101 amarreapp/templates/puertos.html:8
+#: amarreapp/forms.py:133 amarreapp/templates/puertos.html:8
 msgid "Latitude"
 msgstr "Latitud"
 
-#: amarreapp/forms.py:102 amarreapp/templates/puertos.html:8
+#: amarreapp/forms.py:134 amarreapp/templates/puertos.html:8
 msgid "Longitude"
 msgstr "Longitud"
 
-#: amarreapp/forms.py:103 amarreapp/templates/amarres.html:4
+#: amarreapp/forms.py:135 amarreapp/templates/amarres.html:4
+#: amarreapp/templates/index.html:19
 msgid "Moorings"
 msgstr "Amarres"
 
-#: amarreapp/forms.py:104
+#: amarreapp/forms.py:136
 msgid "Showers"
 msgstr "Duchas"
 
-#: amarreapp/forms.py:105
+#: amarreapp/forms.py:137
 msgid "Information"
 msgstr "Información"
 
-#: amarreapp/forms.py:118 amarreapp/templates/combustibles.html:10
+#: amarreapp/forms.py:150 amarreapp/templates/combustibles.html:10
 msgid "Type"
 msgstr "Tipo"
 
-#: amarreapp/forms.py:119 amarreapp/templates/combustibles.html:11
+#: amarreapp/forms.py:151 amarreapp/templates/combustibles.html:11
 msgid "Price €/l"
 msgstr "Precio €/l"
 
-#: amarreapp/forms.py:144
+#: amarreapp/forms.py:186
 msgid "ID.Number"
 msgstr "DNI"
 
-#: amarreapp/forms.py:145
+#: amarreapp/forms.py:187
 msgid "Length (m)"
 msgstr "Eslora (m)"
 
-#: amarreapp/forms.py:146
+#: amarreapp/forms.py:188
 msgid "Beam (m)"
 msgstr "Manga (m)"
 
-#: amarreapp/forms.py:147
+#: amarreapp/forms.py:189
 msgid "Draugth (m)"
 msgstr "Calado (m)"
 
-#: amarreapp/forms.py:148
+#: amarreapp/forms.py:190
 msgid "# motor"
 msgstr "# motor"
 
-#: amarreapp/forms.py:149
+#: amarreapp/forms.py:191
 msgid "Motor CV"
 msgstr "Motor CV"
 
-#: amarreapp/forms.py:150
+#: amarreapp/forms.py:192
 msgid "Motor Type"
 msgstr "Tipo Motor"
 
-#: amarreapp/forms.py:151
+#: amarreapp/forms.py:193
 msgid "Consume (l/h)"
 msgstr "Consumo (l/h)"
 
-#: amarreapp/forms.py:152
+#: amarreapp/forms.py:194
 msgid "Motor fuel"
 msgstr "Combustible Motor"
 
-#: amarreapp/forms.py:153
+#: amarreapp/forms.py:195
 msgid "Velocity (kn)"
 msgstr "Velocidad (kn)"
 
-#: amarreapp/models.py:40 amarreapp/models.py:91 amarreapp/models.py:110
-#: amarreapp/models.py:134 amarreapp/models.py:160 amarreapp/models.py:213
-#: amarreapp/models.py:235 amarreapp/models.py:331
+#: amarreapp/models.py:40 amarreapp/models.py:98 amarreapp/models.py:117
+#: amarreapp/models.py:141 amarreapp/models.py:167 amarreapp/models.py:222
+#: amarreapp/models.py:244 amarreapp/models.py:343
 msgid "TimeStamp"
 msgstr "Fecha de creación"
 
-#: amarreapp/models.py:41 amarreapp/models.py:92 amarreapp/models.py:111
-#: amarreapp/models.py:135 amarreapp/models.py:161 amarreapp/models.py:214
-#: amarreapp/models.py:236 amarreapp/models.py:332
+#: amarreapp/models.py:41 amarreapp/models.py:99 amarreapp/models.py:118
+#: amarreapp/models.py:142 amarreapp/models.py:168 amarreapp/models.py:223
+#: amarreapp/models.py:245 amarreapp/models.py:344
 msgid "Updated"
 msgstr "Fecha de actualización"
 
-#: amarreapp/models.py:99
+#: amarreapp/models.py:106
 msgid "street"
 msgstr "calle"
 
-#: amarreapp/models.py:100
+#: amarreapp/models.py:107
 msgid "city"
 msgstr "ciudad"
 
-#: amarreapp/models.py:101
+#: amarreapp/models.py:108
 msgid "province"
 msgstr "provincia"
 
-#: amarreapp/models.py:102
+#: amarreapp/models.py:109
 msgid "postal code"
 msgstr "código postal"
 
-#: amarreapp/models.py:103
+#: amarreapp/models.py:110
 msgid "country"
 msgstr "país"
 
-#: amarreapp/models.py:104
+#: amarreapp/models.py:111
 msgid "email"
 msgstr "correo electrónico"
 
-#: amarreapp/models.py:106
+#: amarreapp/models.py:113
 msgid "phone"
 msgstr "teléfono"
 
-#: amarreapp/models.py:118 amarreapp/models.py:142 amarreapp/models.py:174
-#: amarreapp/models.py:281
+#: amarreapp/models.py:125 amarreapp/models.py:149 amarreapp/models.py:181
+#: amarreapp/models.py:293
 msgid "name"
 msgstr "nombre"
 
-#: amarreapp/models.py:121 amarreapp/templates/precios.html:7
+#: amarreapp/models.py:128 amarreapp/templates/precios.html:7
 msgid "January"
 msgstr "Enero"
 
-#: amarreapp/models.py:122 amarreapp/templates/precios.html:7
+#: amarreapp/models.py:129 amarreapp/templates/precios.html:7
 msgid "February"
 msgstr "Febrero"
 
-#: amarreapp/models.py:123
+#: amarreapp/models.py:130
 msgid "March"
 msgstr "Marzo"
 
-#: amarreapp/models.py:124
+#: amarreapp/models.py:131
 msgid "April"
 msgstr "Abril"
 
-#: amarreapp/models.py:125 amarreapp/templates/amarre_add.html:47
+#: amarreapp/models.py:132 amarreapp/templates/amarre_add.html:47
 #: amarreapp/templates/amarre_edit.html:48 amarreapp/templates/amarres.html:16
 msgid "May"
 msgstr "Mayo"
 
-#: amarreapp/models.py:126
+#: amarreapp/models.py:133
 msgid "June"
 msgstr "Junio"
 
-#: amarreapp/models.py:127
+#: amarreapp/models.py:134
 msgid "July"
 msgstr "Julio"
 
-#: amarreapp/models.py:128
+#: amarreapp/models.py:135
 msgid "August"
 msgstr "Agosto"
 
-#: amarreapp/models.py:129
+#: amarreapp/models.py:136
 msgid "September"
 msgstr "Septiembre"
 
-#: amarreapp/models.py:130
+#: amarreapp/models.py:137
 msgid "October"
 msgstr "Octubre"
 
-#: amarreapp/models.py:131
+#: amarreapp/models.py:138
 msgid "November"
 msgstr "Noviembre"
 
-#: amarreapp/models.py:132
+#: amarreapp/models.py:139
 msgid "December"
 msgstr "Deciembre"
 
-#: amarreapp/models.py:145
+#: amarreapp/models.py:152
 msgid "length"
 msgstr "eslora"
 
-#: amarreapp/models.py:146
+#: amarreapp/models.py:153
 msgid "beam"
 msgstr "manga"
 
-#: amarreapp/models.py:147
+#: amarreapp/models.py:154
 msgid "water"
 msgstr "agua"
 
-#: amarreapp/models.py:148
+#: amarreapp/models.py:155
 msgid "electricity"
 msgstr "electricidad"
 
-#: amarreapp/models.py:155 amarreapp/models.py:199
+#: amarreapp/models.py:162 amarreapp/models.py:206
 msgid "information"
 msgstr "información"
 
-#: amarreapp/models.py:176
+#: amarreapp/models.py:183
 msgid "island"
 msgstr "isla"
 
-#: amarreapp/models.py:182
+#: amarreapp/models.py:189
 msgid "latitude"
 msgstr "latitud"
 
-#: amarreapp/models.py:185
+#: amarreapp/models.py:192
 msgid "longitude"
 msgstr "longitud"
 
-#: amarreapp/models.py:204
+#: amarreapp/models.py:211
 msgid "image"
 msgstr "imagen"
 
-#: amarreapp/models.py:225 amarreapp/models.py:290
+#: amarreapp/models.py:234 amarreapp/models.py:302
 msgid "source"
 msgstr "origen"
 
-#: amarreapp/models.py:231
+#: amarreapp/models.py:240
 msgid "destination"
 msgstr "destino"
 
-#: amarreapp/models.py:233
+#: amarreapp/models.py:242
 msgid "distance_nmi"
 msgstr "distancia_nmi"
 
-#: amarreapp/models.py:285
+#: amarreapp/models.py:297
 msgid "zone"
 msgstr "zona"
 
-#: amarreapp/models.py:296
+#: amarreapp/models.py:308
 msgid "forecast"
 msgstr "predicción"
 
-#: amarreapp/models.py:312
+#: amarreapp/models.py:324
 msgid "start_date"
 msgstr "fecha inicio"
 
-#: amarreapp/models.py:317
+#: amarreapp/models.py:329
 msgid "days"
 msgstr "dias"
 
-#: amarreapp/models.py:322
+#: amarreapp/models.py:334
 msgid "end_date"
 msgstr "fecha fin"
 
@@ -304,13 +317,13 @@ msgstr "Añadir Amarre"
 
 #: amarreapp/templates/amarre_add.html:14
 #: amarreapp/templates/amarre_edit.html:15 amarreapp/templates/amarres.html:10
-#: amarreapp/templates/embarcaciones.html:11
+#: amarreapp/templates/embarcaciones.html:10
 msgid "Length"
 msgstr "Eslora"
 
 #: amarreapp/templates/amarre_add.html:18
 #: amarreapp/templates/amarre_edit.html:19 amarreapp/templates/amarres.html:11
-#: amarreapp/templates/embarcaciones.html:12
+#: amarreapp/templates/embarcaciones.html:11
 msgid "Beam"
 msgstr "Manga"
 
@@ -392,7 +405,8 @@ msgstr "Cambiar precio seleccionado"
 #: amarreapp/templates/amarre_add.html:82
 #: amarreapp/templates/amarre_edit.html:84
 #: amarreapp/templates/combustibles.html:25
-#: amarreapp/templates/embarcaciones.html:27
+#: amarreapp/templates/distancias.html:19
+#: amarreapp/templates/embarcaciones.html:25
 #: amarreapp/templates/predicciones.html:28 amarreapp/templates/puertos.html:20
 #: amarreapp/templates/usuarios.html:34
 msgid "Change"
@@ -406,7 +420,8 @@ msgstr "Borrar precio seleccionado"
 #: amarreapp/templates/amarre_add.html:89
 #: amarreapp/templates/amarre_edit.html:91
 #: amarreapp/templates/combustibles.html:32
-#: amarreapp/templates/embarcaciones.html:32
+#: amarreapp/templates/distancias.html:24
+#: amarreapp/templates/embarcaciones.html:30
 #: amarreapp/templates/precios.html:24 amarreapp/templates/predicciones.html:35
 #: amarreapp/templates/puertos.html:27 amarreapp/templates/usuarios.html:39
 msgid "Delete"
@@ -421,13 +436,14 @@ msgstr "Añadir Precio"
 
 #: amarreapp/templates/amarre_add.html:106
 #: amarreapp/templates/amarreapp/amarre_form.html:13
-#: amarreapp/templates/amarreapp/combustible_form.html:15
+#: amarreapp/templates/amarreapp/combustible_form.html:13
+#: amarreapp/templates/amarreapp/distancia_form.html:15
 #: amarreapp/templates/amarreapp/embarcacion_form.html:13
 #: amarreapp/templates/amarreapp/precio_form.html:13
 #: amarreapp/templates/amarreapp/prediccion_form.html:13
 #: amarreapp/templates/amarreapp/puerto_form.html:13
 #: amarreapp/templates/auth/user_form.html:21
-#: amarreapp/templates/puerto_add.html:14
+#: amarreapp/templates/puerto_add.html:45
 msgid "Save"
 msgstr "Grabar"
 
@@ -440,7 +456,8 @@ msgid "Delete selected mooring"
 msgstr "Borrar amarre seleccionado"
 
 #: amarreapp/templates/amarres.html:74 amarreapp/templates/combustibles.html:47
-#: amarreapp/templates/embarcaciones.html:45
+#: amarreapp/templates/distancias.html:37
+#: amarreapp/templates/embarcaciones.html:43
 #: amarreapp/templates/precios.html:39 amarreapp/templates/predicciones.html:50
 #: amarreapp/templates/puertos.html:42 amarreapp/templates/usuarios.html:54
 msgid "Add"
@@ -470,27 +487,70 @@ msgstr "Cambiar carburante seleccionado"
 msgid "Delete selected fuel"
 msgstr "Borrar carburante seleccionado"
 
+#: amarreapp/templates/distancias.html:5 
+#: amarreapp/templates/index.html:31
+#: amarreapp/templates/puerto_add.html:28
+msgid "Distances"
+msgstr "Distancias"
+
+#: amarreapp/templates/distancias.html:8
+msgid "From"
+msgstr "Origen"
+
+#: amarreapp/templates/distancias.html:8
+msgid "To"
+msgstr "Destino"
+
+#: amarreapp/templates/distancias.html:8
+#: amarreapp/templates/resultado_amarre.html:7
+msgid "Distance (nmi)"
+msgstr "Distancia (nmi)"
+
+#: amarreapp/templates/distancias.html:18
+msgid "Change selected distance"
+msgstr "Cambiar distancia seleccionada"
+
+#: amarreapp/templates/distancias.html:23
+msgid "Delete selected distance"
+msgstr "Borrar distancia seleccionada"
+
 #: amarreapp/templates/embarcaciones.html:4
 msgid "Boats"
 msgstr "Embarcaciones"
 
-#: amarreapp/templates/embarcaciones.html:10
-msgid "Registration number"
-msgstr "Matricula"
-
-#: amarreapp/templates/embarcaciones.html:13
+#: amarreapp/templates/embarcaciones.html:12
 msgid "Draught"
 msgstr "Calado"
 
-#: amarreapp/templates/embarcaciones.html:26
+#: amarreapp/templates/embarcaciones.html:24
 msgid "Change selected boat"
 msgstr "Cambiar embarcacion seleccionada"
 
-#: amarreapp/templates/embarcaciones.html:31
+#: amarreapp/templates/embarcaciones.html:29
 msgid "Delete selected boat"
 msgstr "Borrar embarcacion seleccionada"
 
-#: amarreapp/templates/index.html:49
+#: amarreapp/templates/index.html:11 amarreapp/templates/usuarios.html:4
+msgid "Users"
+msgstr "Usuarios"
+
+#: amarreapp/templates/index.html:25 amarreapp/templates/puertos.html:4
+msgid "Ports"
+msgstr "Puertos"
+
+#: amarreapp/templates/index.html:39
+msgid "Fuels"
+msgstr "Carburantes"
+
+#: amarreapp/templates/index.html:47 amarreapp/templates/predicciones.html:4
+msgid "Forecasts"
+msgstr "Predicciones"
+
+#: amarreapp/templates/index.html:54
+msgid "My Boats"
+msgstr "Mis Embarcaciones"
+
+#: amarreapp/templates/index.html:60
 msgid "Search Mooring"
 msgstr "Buscar Amarre"
 
@@ -498,15 +558,11 @@ msgstr "Buscar Amarre"
 msgid "Edit"
 msgstr "Editar"
 
-#: amarreapp/templates/predicciones.html:4
-msgid "Forecasts"
-msgstr "Predicciones"
-
 #: amarreapp/templates/predicciones.html:9
 msgid "Zone"
 msgstr "Zona"
 
-#: amarreapp/templates/predicciones.html:10 amarreapp/views.py:459
+#: amarreapp/templates/predicciones.html:10 amarreapp/views.py:586
 msgid "Start Date"
 msgstr "Fecha inicio"
 
@@ -530,9 +586,9 @@ msgstr "Cambiar prediccion seleccionada"
 msgid "Delete selected forecast"
 msgstr "Borrar prediccion seleccionada"
 
-#: amarreapp/templates/puertos.html:4
-msgid "Ports"
-msgstr "Puertos"
+#: amarreapp/templates/puerto_add.html:12
+msgid "Contact"
+msgstr "Contacto"
 
 #: amarreapp/templates/puertos.html:19
 msgid "Change selected port"
@@ -549,10 +605,6 @@ msgstr "Amarres de puerto"
 #: amarreapp/templates/resultado_amarre.html:7
 msgid "Port"
 msgstr "Puerto"
-
-#: amarreapp/templates/resultado_amarre.html:7
-msgid "Distance (nmi)"
-msgstr "Distancia (nmi)"
 
 #: amarreapp/templates/resultado_amarre.html:7
 msgid "Navegation costs (€)"
@@ -581,10 +633,6 @@ msgstr "Añadir Usuario"
 #: amarreapp/templates/usuario_add.html:9 amarreapp/templates/usuarios.html:9
 msgid "Username"
 msgstr "Nombre de usuario"
-
-#: amarreapp/templates/usuario_add.html:22
-msgid "Password"
-msgstr "Contraseña"
 
 #: amarreapp/templates/usuario_add.html:29
 msgid "Password (Confirm)"
@@ -622,10 +670,6 @@ msgstr "Gestor de combustibles"
 msgid "Forecast manager"
 msgstr "Gestor de predicciones"
 
-#: amarreapp/templates/usuarios.html:4
-msgid "Users"
-msgstr "Usuarios"
-
 #: amarreapp/templates/usuarios.html:10
 msgid "Email Address"
 msgstr "Dirección de correo electrónico"
@@ -646,21 +690,24 @@ msgstr "Cambiar usuario seleccionado"
 msgid "Delete selected user"
 msgstr "Borrar usuario seleccionado"
 
-#: amarreapp/views.py:457
+#: amarreapp/views.py:584
 msgid "Days"
 msgstr "Dias"
 
-#: amarreapp/views.py:462
+#: amarreapp/views.py:589
 msgid "Lat."
 msgstr "Lat."
 
-#: amarreapp/views.py:468
+#: amarreapp/views.py:595
 msgid "Long."
 msgstr "Long."
 
-#: amarreapp/views.py:474
+#: amarreapp/views.py:601
 msgid "Boat"
 msgstr "Embarcaciones"
+
+#~ msgid "Registration number"
+#~ msgstr "Matricula"
 
 #, fuzzy
 #~| msgid "Name"
@@ -681,9 +728,6 @@ msgstr "Embarcaciones"
 #~| msgid "Latitude"
 #~ msgid "Lattitude"
 #~ msgstr "Latitud"
-
-#~ msgid "Contact"
-#~ msgstr "Contacto"
 
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"

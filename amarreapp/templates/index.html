@@ -24,6 +24,12 @@
 	role="button">
 	{% trans "Ports" %}
 </a>
+<a class="btn btn-primary btn-block"
+	align="center" 
+	href="{%url 'list_distancias' %}"
+	role="button">
+	{% trans "Distances" %}
+</a>
 {% endif %}
 {% if request.user.is_superuser or request.user|has_group:"gestor_combustible" %}
 <a class="btn btn-primary btn-block"

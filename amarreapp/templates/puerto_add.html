@@ -2,10 +2,41 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% block content %}
-<form class="form-horizontal" role="form" id="puerto_add" method="post" action="{% url 'create_puerto' %}">
+<form class="form-horizontal" role="form" id="puerto_add" method="post" >
   {% csrf_token %}
   {% bootstrap_form puerto_form layout='horizontal' %}
-  {% bootstrap_form contacto_form layout='horizontal' %}
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse_contacto">{% trans "Contact" %}</a>
+        </h4>
+      </div>
+      <div id="collapse_contacto" class="panel-collapse collapse">
+        <div class="panel-body">
+        {% bootstrap_form contacto_form layout='horizontal' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if inlines %}
+  <input type="hidden" value="{{extra}}" name="extra">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse_distances">{% trans "Distances" %}</a>
+        </h4>
+      </div>
+      <div id="collapse_distances" class="panel-collapse collapse">
+        <div class="panel-body">
+        {{ inlines.management_form }}
+        {% bootstrap_formset inlines layout='horizontal' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
   <div class="form-group">
     <label class="col-md-3 control-label"></label>
     <div class="col-md-9">

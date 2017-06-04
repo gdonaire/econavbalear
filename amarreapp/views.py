@@ -22,10 +22,14 @@ from datetime import timedelta
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.forms import modelformset_factory
+from django.forms import inlineformset_factory
+from .decorators import group_required 
 from .forms import FormContacto
 from .forms import UsuarioCreationForm, UsuarioChangeForm, reset_form
 from .forms import PrecioForm, AmarreForm
+#from .forms import DistanciaFormSet 
 from .forms import PuertoForm
+from .forms import DistanciaForm
 from .forms import CombustibleForm
 from .forms import PrediccionForm
 from .forms import EmbarcacionForm
@@ -182,7 +186,7 @@ def change_password(request):
         return response
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class ListPrecios(ListView):
     model = Precio 
     template_name='precios.html'
@@ -198,7 +202,7 @@ class ListPrecios(ListView):
             return HttpResponseRedirect(reverse('delete_precio', kwargs={'pk':pk}))
 
 
-@method_decorator([login_required, permission_required('amarreapp.add_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class CreatePrecio(CreateView):
     model = Precio 
     form_class = PrecioForm 
@@ -214,20 +218,20 @@ class CreatePrecio(CreateView):
             return super(CreatePrecio, self).post(request, *args, **kwargs)
 
 
-@method_decorator([login_required, permission_required('amarreapp.change_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class EditPrecio(UpdateView):
     model = Precio 
     form_class = PrecioForm 
     success_url=reverse_lazy('list_precios')
 
 
-@method_decorator([login_required, permission_required('amarreapp.delete_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class DeletePrecio(DeleteView):
     model = Precio 
     success_url=reverse_lazy('list_precios')
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class ListAmarres(ListView):
     model = Amarre 
     template_name='amarres.html'
@@ -243,7 +247,7 @@ class ListAmarres(ListView):
             return HttpResponseRedirect(reverse('delete_amarre', kwargs={'pk':pk}))
 
 
-@method_decorator([login_required, permission_required('amarreapp.add_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class CreateAmarre(CreateView):
     model = Amarre
     form_class = AmarreForm 
@@ -276,7 +280,7 @@ class CreateAmarre(CreateView):
         return HttpResponseRedirect(reverse('list_amarres'))
 
 
-@method_decorator([login_required, permission_required('amarreapp.change_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class EditAmarre(UpdateView):
     model = Amarre
     form_class = AmarreForm 
@@ -312,13 +316,49 @@ class EditAmarre(UpdateView):
         return HttpResponseRedirect(reverse('list_amarres'))
 
 
-@method_decorator([login_required, permission_required('amarreapp.delete_puertos')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class DeleteAmarre(DeleteView):
     model = Amarre 
     success_url=reverse_lazy('list_amarres')
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
+class ListDistancias(ListView):
+    model = Distancia 
+    template_name='distancias.html'
+
+    def post(self, request, *args, **kwargs):
+        order = request.POST.get('order')
+        pk = request.POST.get('pk')
+        if (order == 'add'):
+            return HttpResponseRedirect(reverse('create_distancia'))
+        elif (order == 'edit'):
+            return HttpResponseRedirect(reverse('edit_distancia', kwargs={'pk':pk}))
+        elif (order == 'delete'):
+            return HttpResponseRedirect(reverse('delete_distancia', kwargs={'pk':pk}))
+
+
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
+class CreateDistancia(CreateView):
+    model = Distancia
+    form_class = DistanciaForm
+    success_url=reverse_lazy('list_distancias')
+
+
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
+class EditDistancia(UpdateView):
+    model = Distancia
+    form_class = DistanciaForm 
+    success_url=reverse_lazy('list_distancias')
+
+
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
+class DeleteDistancia(DeleteView):
+    model = Distancia 
+    success_url=reverse_lazy('list_distancias')
+
+
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class ListPuertos(ListView):
     model = Puerto 
     template_name='puertos.html'
@@ -333,58 +373,93 @@ class ListPuertos(ListView):
         elif (order == 'delete'):
             return HttpResponseRedirect(reverse('delete_puerto', kwargs={'pk':pk}))
 
+class DistanciasInline(InlineFormSet):
+    model = Distancia
+    fields = ['destino', 'distancia_nmi']
 
-@method_decorator([login_required, permission_required('amarreapp.add_puerto')], name='dispatch')
-class CreatePuerto(CreateView):
+
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
+class CreatePuerto(CreateWithInlinesView):
     model = Puerto 
-    form_class = PuertoForm
+    context_object_name = 'puerto'
+    fields = ['nombre', 'isla', 'latitud', 'longitud', 'amarre', 'duchas', 'informacion']
     template_name = 'puerto_add.html'
     success_url=reverse_lazy('list_puertos')
-
+    
     def get(self, request, *args, **kwargs):
         data = {'isla':'Mallorca'}
         puerto_form = PuertoForm(data, prefix="port")
         contacto_form = FormContacto(prefix="contact")
         amarres = Amarre.objects.all()
-        context_dict = {'puerto_form': puerto_form, 'contacto_form': contacto_form, 'amarres': amarres}
+        # Numero de formularios extra para las distancias...tantos como puertos exista
+        extra=Puerto.objects.count()
+        initial_data = []
+        for puerto in Puerto.objects.all():
+            initial_data.append({'destino':puerto})
+        DistanciasInlineFormSet = inlineformset_factory(Puerto, Distancia, fk_name='origen', fields=('destino','distancia_nmi',), extra=extra)
+        formset = DistanciasInlineFormSet(instance=None, initial=initial_data, prefix='origen')
+        context_dict = {'puerto_form': puerto_form, 'contacto_form': contacto_form, 'amarres': amarres, 'inlines':formset, 'extra':extra}
         # Return response back to the user, updating any cookies that need changed. 
         response = render(request, 'puerto_add.html', context_dict)                      
         return response  
-
+    
     def post(self, request, *args, **kwargs):
         order = request.POST.get('order')
         if (order == 'Save'):
             data = request.POST
             puerto_form = PuertoForm(data, prefix="port")
             contacto_form = FormContacto(data, prefix="contact")
-            if puerto_form.is_valid() and contacto_form.is_valid():
+            extra = int(float(request.POST['extra']))
+            DistanciasInlineFormSet = inlineformset_factory(Puerto, Distancia, fk_name='origen', fields=('destino','distancia_nmi',), extra=extra)
+            distancias_formset = DistanciasInlineFormSet(data, request.FILES, instance=None, prefix='origen')
+            if not puerto_form.is_valid():
+                print('PUERTO NOOOOOOOOOOOOOOOOOO VALIDO')
+            if not contacto_form.is_valid():
+                print('CONTACTO NOOOOOOOOOOOOOOOOOO VALIDO')
+            if not distancias_formset.is_valid():
+                print('FORMSET NOOOOOOOOOOOOOOOOOO VALIDO')
+            if puerto_form.is_valid() and contacto_form.is_valid() and distancias_formset.is_valid():
                 contacto = contacto_form.save()
                 cd = puerto_form.cleaned_data
-                puerto = Puerto()
-                puerto.nombre = cd.get('nombre')
-                puerto.isla = cd.get('isla')
-                puerto.latitud = cd.get('latitud')
-                puerto.longitud = cd.get('longitud')
-                puerto.rampa = False
+                #puerto = Puerto()
+                puerto = puerto_form.save(commit=False)
+                #puerto.nombre = cd.get('nombre')
+                #puerto.isla = cd.get('isla')
+                #puerto.latitud = cd.get('latitud')
+                #puerto.longitud = cd.get('longitud')
+                #puerto.rampa = False
                 puerto.contacto = contacto
                 puerto.save()
+                for distancia_form in distancias_formset:
+                    origen = puerto
+                    destino = distancia_form.cleaned_data.get('destino')
+                    distancia_nmi = distancia_form.cleaned_data.get('distancia_nmi')
+                    if (destino is not None) and (distancia_nmi is not None) and (distancia_nmi > 0):
+                    #print('Origen')
+                    #print(origen)
+                    #print('Destino')
+                    #print(destino)
+                    #print('Distancia_nmi')
+                    #print(distancia_nmi)
+                        dist = Distancia(origen=puerto, destino=destino, distancia_nmi=distancia_nmi)
+                        dist.save()
         return HttpResponseRedirect(reverse('list_puertos'))
 
 
-@method_decorator([login_required, permission_required('amarreapp.change_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class EditPuerto(UpdateView):
     model = Puerto 
     form_class = PuertoForm
     success_url=reverse_lazy('list_puertos')
 
 
-@method_decorator([login_required, permission_required('amarreapp.delete_puerto')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class DeletePuerto(DeleteView):
     model = Puerto 
     success_url=reverse_lazy('list_puertos')
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, group_required('gestor_combustible')], name='dispatch')
 class ListCombustibles(ListView):
     model = Combustible 
     template_name='combustibles.html'
@@ -400,27 +475,27 @@ class ListCombustibles(ListView):
             return HttpResponseRedirect(reverse('delete_combustible', kwargs={'pk':pk}))
 
 
-@method_decorator([login_required, permission_required('amarreapp.add_combustible')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_combustible')], name='dispatch')
 class CreateCombustible(CreateView):
     model = Combustible 
     form_class = CombustibleForm
     success_url=reverse_lazy('list_combustibles')
 
 
-@method_decorator([login_required, permission_required('amarreapp.change_combustible')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_combustible')], name='dispatch')
 class EditCombustible(UpdateView):
     model = Combustible 
     form_class = CombustibleForm
     success_url=reverse_lazy('list_combustibles')
 
 
-@method_decorator([login_required, permission_required('amarreapp.delete_combustible')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_combustible')], name='dispatch')
 class DeleteCombustible(DeleteView):
     model = Combustible 
     success_url=reverse_lazy('list_combustibles')
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator([login_required, group_required('gestor_prediccion')], name='dispatch')
 class ListPredicciones(ListView):
     model = Prediccion 
     template_name='predicciones.html'
@@ -436,7 +511,7 @@ class ListPredicciones(ListView):
             return HttpResponseRedirect(reverse('delete_prediccion', kwargs={'pk':pk}))
 
 
-@method_decorator([login_required, permission_required('amarreapp.add_prediccion')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_prediccion')], name='dispatch')
 class CreatePrediccion(CreateView):
     model = Prediccion
     form_class = PrediccionForm
@@ -447,14 +522,14 @@ class CreatePrediccion(CreateView):
         return super(CreatePrediccion, self).form_valid(form)
 
 
-@method_decorator([login_required, permission_required('amarreapp.change_prediccion')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_prediccion')], name='dispatch')
 class EditPrediccion(UpdateView):
     model = Prediccion
     form_class = PrediccionForm
     success_url=reverse_lazy('list_predicciones')
 
 
-@method_decorator([login_required, permission_required('amarreapp.delete_prediccion')], name='dispatch')
+@method_decorator([login_required, group_required('gestor_prediccion')], name='dispatch')
 class DeletePrediccion(DeleteView):
     model = Prediccion
     success_url=reverse_lazy('list_predicciones')
@@ -503,6 +578,7 @@ class DeleteEmbarcacion(DeleteView):
     success_url=reverse_lazy('list_embarcaciones')
 
 
+@login_required
 def search_mooring(request):
     class SearchMooringForm(forms.Form):
         dias = forms.IntegerField(label=_('Days'), min_value=1, max_value=5)

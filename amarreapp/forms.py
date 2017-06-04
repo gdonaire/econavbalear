@@ -14,6 +14,7 @@ from crispy_forms.layout import Submit, Layout
 from crispy_forms.bootstrap import FormActions
 from .models import Profile
 from .models import Precio, Amarre 
+from .models import Distancia
 from .models import Puerto
 from .models import Contacto
 from .models import Combustible
@@ -114,6 +115,12 @@ class AmarreForm(ModelForm):
         model = Amarre 
         fields = '__all__'
         exclude = ['precio_dia']
+
+
+class DistanciaForm(ModelForm):
+    class Meta:
+        model = Distancia
+        fields = ('origen', 'destino', 'distancia_nmi')
 
 
 class PuertoForm(ModelForm):

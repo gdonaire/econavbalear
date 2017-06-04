@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load auth_extras %}
+{% block content %}
+{% if request.user.is_superuser or request.user|has_group:"gestor_puerto" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+{% endif %}
+{% endblock %}
