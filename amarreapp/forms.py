@@ -99,6 +99,21 @@ class PrecioForm(ModelForm):
     class Meta:
         model = Precio 
         fields = '__all__'
+        labels = {
+            'nombre': _('Name'), 
+            'enero': _('January'),
+            'febrero': _('February'),
+            'marzo': _('March'),
+            'abril': _('April'),
+            'mayo': _('May'),
+            'junio': _('June'),
+            'julio': _('July'),
+            'agosto': _('August'),
+            'septiembre': _('September'),
+            'octubre': _('October'),
+            'noviembre': _('November'),
+            'diciembre': _('December'),
+        }
 
 
 class AmarreForm(ModelForm):

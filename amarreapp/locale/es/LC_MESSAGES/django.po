@@ -241,7 +241,7 @@ msgstr "Noviembre"
 
 #: amarreapp/models.py:139
 msgid "December"
-msgstr "Deciembre"
+msgstr "Diciembre"
 
 #: amarreapp/models.py:152
 msgid "length"

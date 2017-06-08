@@ -453,6 +453,7 @@ class EditPuerto(UpdateView):
     success_url=reverse_lazy('list_puertos')
 
 
+#@method_decorator([login_required, permission_required('amarreapp.delete_puerto')], name='dispatch')
 @method_decorator([login_required, group_required('gestor_puerto')], name='dispatch')
 class DeletePuerto(DeleteView):
     model = Puerto 
@@ -587,16 +588,12 @@ def search_mooring(request):
                                         initial=timezone.now().date(),
                                         widget=forms.SelectDateWidget())
         latitud = forms.FloatField(label=_('Lat.'),
-                                  min_value = latitud_baleares[0],
-                                  max_value = latitud_baleares[1],
                                   error_messages={'min_value':'Outside Balearic Islands Region'},
-                                  widget=forms.NumberInput(attrs={'step':'0.00001'})
+                                  widget=forms.NumberInput(attrs={'min':'38.675000', 'max':'40.096666', 'step':'0.000001'})
                                   )
         longitud = forms.FloatField(label=_('Long.'),
-                                  min_value = longitud_baleares[0],
-                                  max_value = longitud_baleares[1],
                                   error_messages={'min_value':'Outside Balearic Islands Region'},
-                                  #widget=forms.NumberInput(attrs={'step':'0.00001'})
+                                  widget=forms.NumberInput(attrs={'min':'1.213055', 'max':'4.316666', 'step':'0.000001'})
                                   )
         embarcacion = forms.ModelChoiceField(label=_('Boat'),
             queryset=Embarcacion.objects.filter(propietario=request.user)
@@ -724,7 +721,7 @@ def calcular_distancias_puerto(posicion, puertos):
                 distancia_a_puerto_mas_cercano = (float(Distancia.objects.filter(origen__nombre=puerto.nombre, destino__nombre = puerto_mas_cercano.nombre).get().distancia_nmi))
             else:
                 # No se ha introducido distancia entre los puestos .... coger distancia en linia recta
-                distancia_a_puerto_mas_cercano = km2nm(points2distance([puerto_mas_cercano.latitud, puerto_mas_cercano.latitud], [puerto.latitud, puerto.longitud]))
+                distancia_a_puerto_mas_cercano = km2nm(points2distance([puerto_mas_cercano.latitud, puerto_mas_cercano.longitud], [puerto.latitud, puerto.longitud]))
             distancia = distancia_a_puerto_mas_cercano + distancia_menor_nmi
             resultado = [puerto, distancia]
             resultados.append(resultado)
