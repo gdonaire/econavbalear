@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 {% load auth_extras %}
 {% block content %}
 {% if user.is_authenticated %}
@@ -8,6 +9,7 @@
 	align="center" 
 	href="{%url 'list_usuarios' %}"
 	role="button">
+	<span class="icon-user-tie"></span>
 	{% trans "Users" %}
 </a>
 {% endif %}
@@ -16,18 +18,21 @@
 	align="center" 
 	href="{%url 'list_amarres' %}"
 	role="button">
+	<span class="icon-Amarres"></span>
 	{% trans "Moorings" %}
 </a>
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_puertos' %}"
 	role="button">
+	<span class="icon-Puertos"></span>
 	{% trans "Ports" %}
 </a>
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'list_distancias' %}"
 	role="button">
+	<span class="icon-Distancias"></span>
 	{% trans "Distances" %}
 </a>
 {% endif %}
@@ -36,6 +41,7 @@
 	align="center" 
 	href="{%url 'list_combustibles' %}"
 	role="button">
+	<span class="icon-Carburantes"></span>
 	{% trans "Fuels" %}
 </a>
 {% endif %}
@@ -44,6 +50,7 @@
 	align="center" 
 	href="{%url 'list_predicciones' %}"
 	role="button">
+	<span class="icon-sun"></span>
 	{% trans "Forecasts" %}
 </a >
 {% endif %}
@@ -51,12 +58,14 @@
 	align="center" 
 	href="{%url 'list_embarcaciones' %}"
 	role="button">
+	<span class="icon-sailing-boat-water"></span>
 	{% trans "My Boats" %}
 </a>
 <a class="btn btn-primary btn-block"
 	align="center" 
 	href="{%url 'search_mooring' %}"
 	role="button">
+	<span class="icon-Buscar_Amarre"></span>
 	{% trans 'Search Mooring' %}
 </a>
 {% endif %}

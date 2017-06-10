@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c%43#m_js5k4%8@s5f4l1o@^q6fbs^fzs!_c%y!4f9ol0ijjlr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '172.19.2.133', '192.168.1.90', 'www.amarreapp.net', '90.162.116.26', 'www.econavbalear.net']
 
